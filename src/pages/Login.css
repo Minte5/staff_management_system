@@ -7,7 +7,7 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('/home/mints/Downloads/staff_management_system/src/components/Assets/20231104_082759.jpg') no-repeat;
+    background: url('../components/Assets/20231104_082759.jpg') no-repeat;
     background-size: cover;
     background-position: center;
 }
