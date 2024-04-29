@@ -3,6 +3,7 @@ services:
   web:
     container_name: staff-portal-frontend
     build: .
+    restart: always
     volumes:
       - ./src:/app/src
     ports:
