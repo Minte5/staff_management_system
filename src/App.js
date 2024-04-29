@@ -1,59 +1,79 @@
 import React, { useState } from 'react';
-//import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
-
-
-/*import logo from './logo.svg';
-import './App.css';
-import Navbar from './components/Navbar';*/
-
+import { BrowserRouter as Router, Route, Routes , useLocation} from 'react-router-dom';
 import Login from './pages/Login';
-import AdminPage from './pages/AdminPage';
+import Navbar from './components/Navbar';
+import AdminPage from './pages/AdminDashboard';
 import UserPage1 from './pages/UserPage1';
 import UserPage2 from './pages/UserPage2';
-//import { Register } from './pages/Register';
+import ForgotPassword from './pages/ForgotPassword';
+import ForgotPasswordConfirm from './pages/ForgotPasswordConfirm';
+import AdminDashboard from './pages/AdminDashboard';
 
 
-function App() {
-  
+
+
+const App = () => {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
+  );
+};
+
+const AppContent = () => {
+  // Get the current location using useLocation hook
+  const location = useLocation();
+
+  // Determine whether to render the Navbar based on the current route
+  const shouldRenderNavbar = location.pathname !== '/' && location.pathname !== '/forgot-password' && location.pathname !== '/forgot-password-confirm';
+
   return (
     <div className='App'>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/admin" element={<AdminPage />} />
-          <Route path="/user1" element={<UserPage1 />} />
-          <Route path="/user2" element={<UserPage2 />} />
-        </Routes>
-      </Router>
+      {/* Conditionally render the Navbar */}
+      {shouldRenderNavbar && <Navbar />}
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/forgot-password-confirm" element={<ForgotPasswordConfirm />} />
+        <Route path="/admin/*" element={<AdminDashboard />} />
+        <Route path="/user1" element={<UserPage1 />} />
+        <Route path="/user2" element={<UserPage2 />} />
+      </Routes>
     </div>
-    
   );
 };
 
 
+
 /*function App() {
-  const [currentForm, setCurrentForm] = useState('login');
 
-  const toggleForm = (formName) => {
-    setCurrentForm(formName);
-  }
+  const location = useLocation();
 
+  // Determine whether to render the Navbar based on the current route
+  const shouldRenderNavbar = location.pathname !== '/Login' && location.pathname !== '/forgot-password';
+
+  
   return (
     <div className='App'>
-      {
-        currentForm === "login" ? <Login onFormSwitch={toggleForm}/> : <Register onFormSwitch={toggleForm}/>
-      }
-
+      <Router>
+        
+        {shouldRenderNavbar && <Navbar />}
+        <Routes>
+          
+          <Route path="/" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/forgot-password-confirm" element={<ForgotPasswordConfirm />} />
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/user1" element={<UserPage1 />} />
+          <Route path="/user2" element={<UserPage2 />} />
+        </Routes>
+        
+        
+      </Router>
     </div>
+    
+  );
+};*/
 
 
-    /*<div className="App">
-      <header className="App-header">
-        <Navbar/>
-      </header>
-    </div>*/
-  /*);
-} */
 export default App;

@@ -1,89 +1,97 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 import './Login.css';
-{/*import { FaUser,FaLock} from "react-icons/fa";*/}
 
-const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPass] = useState('');
+const Login = ({ onLogin }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState(false);
   const navigate = useNavigate();
 
-  /*const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(email);
-  }*/
-
-
-
   const handleSubmit = async () => {
-    
-    const response = await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const response = await axios.post('http://0.0.0.0:8888/auth/login/', {
+        'username': username,
+        'password': password,
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-    if (response.ok) {
-      const { role } = await response.json();
+      if (response.status === 200) {
+        const { role, token ,office} = response.data;
+        
+       
+        const tokenString = JSON.stringify(token);
 
-      
-      if (role === 'admin') {
-        navigate.push('/admin');
-      } else if(role === 'user1'){
-        navigate.push('/user1');
-      } else if(role === 'user2') {
-        navigate.push('/user2')
+        
+        localStorage.setItem('token', tokenString);
+        console.log('Stored Token:', token);
+
+        if (role === 'Administrator') {
+          navigate('/admin');
+        } else if (role === 'Coordinator') {
+          if(office === 'PG'){
+            navigate('/user1');
+          }
+          else if(office === 'Ug'){
+            navigate('/user1');
+          }
+          else if(office === 'Ta'){
+            navigate('/user1');
+          }
+          else {
+            setLoginError(true);
+          }
+          
+        } else if (role === 'Staff') {
+          if(office === 'PG'){
+            navigate('/user1');
+          }
+          else if(office === 'Ug'){
+            navigate('/user1');
+          }
+          else if(office === 'Ta'){
+            navigate('/user1');
+          }
+          else {
+            setLoginError(true);
+          }
+          
+        }
+      } else {
+        setLoginError(true);
       }
-    } else {
-      
-      console.error('Login failed');
+    } catch (error) {
+      console.error('Error during login:', error);
+      setLoginError(true);
     }
   };
 
-
-
-
-
-
-
-
-
-
-
-
   return (
-    <div className='wrapper'>
-      
-        <form onSubmit={handleSubmit}>
-            <h1>Login</h1>
-            
-            <div className='input-box'>
-                <input value={email} onChange={(e) => setEmail(e.target.value)} type='email' placeholder='Email' required />
-                {/*<FaUser className='icon' />*/}
-            </div>
-
-            <div className='input-box'>
-                <input value={password} onChange={(e) => setPass(e.target.value)} type='password' placeholder='Password' required />
-                {/*<FaLock className='icon' />*/}
-            </div>
-
-            <div className="remember-forgot">
-              <label><input type='checkbox'/>Remember me </label>
-              <a href='#'> Forgot password</a>
-            </div>
-
-            <button type='submit'>Login</button>
-
-            {/*<div className='register-link'>
-              <p>Don't have an account? <a onClick={() => props.onFormSwitch('register')} href='#'>Register</a></p>
-  </div>*/}
+    <div className='lo'>
+      <div className='wrapper'>
+        <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
+          <h2>Login</h2>
+          <div className='input-box'>
+            <input value={username} onChange={(e) => setUsername(e.target.value)} type='name' id="username" placeholder='UserName' required />
+          </div>
+          <div className='input-box'>
+            <input value={password} onChange={(e) => setPassword(e.target.value)} type='password' id="password" placeholder='Password' required />
+          </div>
+          {loginError && <p className="error-message">Wrong username or password. Please try again.</p>}
+          <div className="remember-forgot">
+            <label><input type='checkbox' />Remember me </label>
+            <a href='/forgot-password'> Forgot password</a>
+          </div>
+          <button type='submit'>Login</button>
         </form>
-        
+      </div>
     </div>
   )
 }
 
-export default Login
+export default Login;

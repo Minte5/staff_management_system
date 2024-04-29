@@ -1,0 +1,246 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+
+/* =============== Globals ============== */
+* {
+  font-family: "Ubuntu", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --blue: #2a2185;
+  --white: #fff;
+  --gray: #f5f5f5;
+  --black1: #222;
+  --black2: #999;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+
+
+/* SideBar.css */
+.sidebar-container {
+    position: relative;
+    width: 100%;;
+}
+
+.sidebar {
+    position: fixed;
+    width: 200px; /* Adjust the width according to your design */
+    height: 100%; /* Set the sidebar height to cover the entire viewport */
+     /* Change color as needed */
+    /* Change text color as needed */
+    padding-top: 0px;
+    /* */
+    background: #3E424B;
+    border-left: 10px solid #3E424B;
+    transition: 0.5s;
+    overflow: hidden;
+    
+}
+
+.sidebar.active {
+    width: 100px;
+  }
+
+.sidebar ul {
+    list-style-type: none; /* Removes bullet points */
+    padding: 0;
+    position: absolute;
+    cursor: pointer;
+    left: 0;
+    width: 100%;
+}
+
+.sidebar ul li {
+    /*padding: 10px 20px;
+    cursor: pointer;*/
+
+    position: relative;
+    width: 100%;
+    list-style: none;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.sidebar ul li:hover,
+.sidebar ul li.hovered {
+    background-color: var(--white); /* Change hover background color as needed */
+}
+
+
+
+.sidebar ul li a {
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: var(--white);
+}
+.sidebar ul li:hover a,
+.sidebar ul li.hovered a {
+    color: var(--blue);
+}
+  
+.sidebar ul li a .icon {
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height: 75px;
+    text-align: center;
+}
+.sidebar ul li a .icon ion-icon {
+    font-size: 1.75rem;
+}
+  
+.sidebar ul li a .title {
+    position: relative;
+    display: block;
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    text-align: start;
+    white-space: nowrap;
+}
+  
+
+/* --------- curve outside ---------- */
+.sidebar ul li:hover a::before,
+.sidebar ul li.hovered a::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -50px;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 35px 35px 0 10px var(--white);
+  pointer-events: none;
+}
+.sidebar ul li:hover a Link::after,
+.sidebar ul li.hovered a Link::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -50px;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 35px -35px 0 10px var(--white);
+  pointer-events: none;
+}
+
+.sub-menu{
+    background-color: #999;
+   
+}
+.sub-menus{
+    
+    margin: 20px;
+}
+
+.dropdown-menu {
+    display: none; /* Hide the dropdown menu by default */
+    position: absolute; /* Position the dropdown menu absolutely */
+    background-color: #fff; /* Background color for the dropdown menu */
+    border: 1px solid #ccc; /* Add a border around the dropdown menu */
+    padding: 10px; /* Add some padding to the dropdown menu */
+    top: 100%; /* Position the submenu below the parent menu item */
+    left: 0; /* Position the submenu flush with the left edge of the parent menu item */
+}
+  
+.dropdown:hover .dropdown-menu {
+    display: block; /* Show the dropdown menu when the parent is hovered */
+}
+  
+
+.main {
+    position: absolute;
+    left: 300px;
+    transition: 0.5s;
+    flex: 1; /* The content takes remaining space */
+    /*background-color: lightblue;  Sample color */
+    padding-left: 100px; /* Adjust to match sidebar width */
+    padding-top: 30px;
+}
+
+.details {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 30px;
+    /* margin-top: 10px; */
+}
+.content .recentOrders {
+    position: relative;
+    display: grid;
+    background: var(--white);
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+}
+
+.recentOrders{
+    padding-top: 50px;
+}
+
+.content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+.content table thead td {
+    font-weight: 600;
+}
+.content .recentOrders table tr {
+    color: var(--black1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.content .recentOrders table tr:last-child {
+    border-bottom: none;
+}
+.content .recentOrders table tbody tr:hover {
+    background: rgb(247, 247, 247);
+    
+}
+.content .recentOrders table tr td {
+    padding: 20px;
+}
+
+.btn{
+    margin: 3px;
+}
+.edit {
+    padding: 2px 4px;
+    background: #8de02c;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.delete {
+    padding: 2px 4px;
+    background: #f00;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.edit:hover{
+    background-color: green;
+}
+.delete:hover{
+    background-color: rgb(133, 1, 1);
+}

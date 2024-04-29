@@ -59,21 +59,12 @@ nav{
   color: white;
 }
 
-
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-      animation: App-logo-spin infinite 10s linear;
-    }
-  }
+.App-logo {
+  width: 55px;
+  height: 55px;
+}
 
 
 
 
-@keyframes App-logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
+
