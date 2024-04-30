@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  web:
+    container_name: staff-portal-frontend
+    build: .
+    restart: always
+    volumes:
+      - ./src:/app/src
+    ports:
+      - 11544:80
+    # stdin_open: true
+    tty: true
