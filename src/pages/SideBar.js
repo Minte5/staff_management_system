@@ -1,30 +1,44 @@
 import './AdminPage.css';
 import { useNavigate, Link  } from 'react-router-dom';
 import axios from 'axios'; // Import Axios
+import Dropdown from 'react-bootstrap/Dropdown';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import { Container, ListGroup } from 'react-bootstrap'; 
 
 
 
 const SideBar = () => {
     return(
         <div className="sidebar">
-            <ul>
-                
-            <li  className="dropdown"><span className='title'><Link to="*/users">List Users</Link></span></li>
-                {/*<ul className="dropdown-menu">*/}
-                {/* Dropdown menu items */}
-            <div className='sub-menu'>
-                <li  className='sub-menu'><a href="#">Submenu Item 1</a></li>
-                <li  className='sub-menu'><a href="#">Submenu Item 2</a></li>
-                <li  className='sub-menu'><a href="#">Submenu Item 3</a></li>
-            </div>
-                
-                {/*</ul>*/}
             
-            <li ><span><Link to="*/create-user">Create User</Link></span></li>
-            <li ><span><Link to="*/create-project">Create Project</Link></span></li>
+            <ListGroup variant="flush">
+                <ListGroup.Item as={Link} to="*/create-user" className="bg-success">
+                    <span>Create User</span>
+                </ListGroup.Item>
+                <ListGroup.Item as={Link} to="*/create-project" className="bg-success">
+                    <span>Create Project</span>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                    <Dropdown>
+                        <Dropdown.Toggle as={Link} to="*/users" variant="success" id="dropdown-basic" >
+                            <span className="title">List Users</span>
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item href="#/action-1">Action 1</Dropdown.Item>
+                            <Dropdown.Item href="#/action-2">Action 2</Dropdown.Item>
+                            <Dropdown.Item href="#/action-3">Action 3</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </ListGroup.Item>
+            
+            </ListGroup>
             <li ><a><span className='title'>Menu Item 1</span></a></li>
+
+
             
-            </ul>
+            
+            
         </div>
     )
 }

@@ -8,6 +8,8 @@ import UserPage2 from './pages/UserPage2';
 import ForgotPassword from './pages/ForgotPassword';
 import ForgotPasswordConfirm from './pages/ForgotPasswordConfirm';
 import AdminDashboard from './pages/AdminDashboard';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 
