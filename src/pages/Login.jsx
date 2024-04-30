@@ -32,7 +32,7 @@ const Login = ({ onLogin }) => {
         console.log('Stored Token:', token);
 
         if (role === 'Administrator') {
-          navigate('/admin');
+          navigate('/admin/*/users');
         } else if (role === 'Coordinator') {
           if(office === 'PG'){
             navigate('/user1');

@@ -18,7 +18,14 @@ const CreateProject = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://api.example.com/projects', formData);
+      const storedTokenString = localStorage.getItem('token');
+      const token = JSON.parse(storedTokenString);
+      
+      const response= await axios.post('http://api.example.com/projects', formData={
+        headers: {
+          Authorization: `Token ${token.key}` 
+        }
+      });
       console.log('Project created successfully:', response.data);
       // Clear form data after successful submission
       setFormData({

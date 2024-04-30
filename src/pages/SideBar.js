@@ -18,10 +18,10 @@ const SideBar = () => {
                 <ListGroup.Item as={Link} to="*/create-project" className="bg-success">
                     <span>Create Project</span>
                 </ListGroup.Item>
-                <ListGroup.Item>
-                    <Dropdown>
-                        <Dropdown.Toggle as={Link} to="*/users" variant="success" id="dropdown-basic" >
-                            <span className="title">List Users</span>
+                
+                    <Dropdown as={Link} to="*/users" className="bg-success">
+                        <Dropdown.Toggle   className="bg-success">
+                            <span className="title" >List Users</span>
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
@@ -30,7 +30,7 @@ const SideBar = () => {
                             <Dropdown.Item href="#/action-3">Action 3</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
-                </ListGroup.Item>
+                
             
             </ListGroup>
             <li ><a><span className='title'>Menu Item 1</span></a></li>
