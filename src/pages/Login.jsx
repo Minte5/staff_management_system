@@ -37,10 +37,10 @@ const Login = ({ onLogin }) => {
           if(office === 'PG'){
             navigate('/user1');
           }
-          else if(office === 'Ug'){
+          else if(office === 'UG'){
             navigate('/user1');
           }
-          else if(office === 'Ta'){
+          else if(office === 'TA'){
             navigate('/user1');
           }
           else {
