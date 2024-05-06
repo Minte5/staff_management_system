@@ -21,7 +21,7 @@ const CreateProject = () => {
       const storedTokenString = localStorage.getItem('token');
       const token = JSON.parse(storedTokenString);
       
-      const response= await axios.post('http://api.example.com/projects', formData={
+      const response = await axios.post('http://0.0.0.0:8888/project/', formData, {
         headers: {
           Authorization: `Token ${token.key}` 
         }
@@ -90,3 +90,4 @@ const CreateProject = () => {
 };
 
 export default CreateProject;
+
