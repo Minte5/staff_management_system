@@ -49,7 +49,6 @@ const AdminDashboard = () => {
         <SideBar />
         <div className="content">
         <Routes>
-        
             <Route path="*/users" element={<ListUsers />} />
             <Route path="*/create-user" element={<CreateUsers />} />
             <Route path="*/create-project" element={<CreateProject />} />

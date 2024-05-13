@@ -91,18 +91,20 @@ const ListUsers = () => {
       <div className="recentOrders">
       
       {users !== null && (
-        <div className="search-area">
+        <div>
+        <form className="d-flex" role='search'>
           <input
             type="text"
             value={id}
             onChange={(e) => setSearchId(e.target.value)}
             placeholder="Search user ID"
           />
-          <button onClick={handleSearch}>Search</button>
-       
-          <table>
+          <button className="btn btn-success" onClick={handleSearch}>Search</button>
+          {/* <button>Search</button> */}
+          </form>
+          <table className='table'>
             <thead>
-              <tr>
+              <tr className='table-dark'>
                 <th>First name</th>
                 <th>Last name</th>
                 <th>Gender</th>
@@ -124,11 +126,11 @@ const ListUsers = () => {
                   <td>{user.phone}</td>
                   <td>{user.email}</td>
                   <td>
-                    <button onClick={() => handleEditClick(user)} className='btn1'>
-                      <span className="edit">Edit</span>
+                    <button onClick={() => handleEditClick(user)} className='btn btn-success'>
+                      Edit
                     </button>
-                    <button onClick={() => deleteUser(user.id)} className='btn2'>
-                      <span className="delete">Delete</span>
+                    <button onClick={() => deleteUser(user.id)} className='btn btn-danger'>
+                      Delete
                     </button>
                   </td>
                 </tr>
