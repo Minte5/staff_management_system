@@ -7,6 +7,7 @@ import UserPage1 from './pages/UserPage1';
 import UserPage2 from './pages/UserPage2';
 import ForgotPassword from './pages/ForgotPassword';
 import ForgotPasswordConfirm from './pages/ForgotPasswordConfirm';
+import SetNewPassword from './pages/SetNewPassword';
 import AdminDashboard from './pages/AdminDashboard';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -37,6 +38,7 @@ const AppContent = () => {
         <Route path="/" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/forgot-password-confirm" element={<ForgotPasswordConfirm />} />
+        <Route path="/set_password" element={<SetNewPassword />} />
         <Route path="/admin/*" element={<AdminDashboard />} />
         <Route path="/user1" element={<UserPage1 />} />
         <Route path="/user2" element={<UserPage2 />} />

@@ -14,8 +14,8 @@ const CreateUsers = () => {
         phone: "",
         office: "",
         role: "",
-        password: "",
-        confirm_password: "",
+        // password: "",
+        // confirm_password: "",
         gender: "",
         is_active: false,
       });
@@ -51,11 +51,11 @@ const CreateUsers = () => {
       validationErrors.email = 'Invalid email address';
     }
     // Validate password
-    if (!formData.password.trim()) {
-      validationErrors.password = 'Password is required';
-    } else if (formData.password.trim() !== formData.confirm_password.trim()) {
-      validationErrors.confirm_password = 'Passwords do not match';
-    }
+    // if (!formData.password.trim()) {
+    //   validationErrors.password = 'Password is required';
+    // } else if (formData.password.trim() !== formData.confirm_password.trim()) {
+    //   validationErrors.confirm_password = 'Passwords do not match';
+    // }
 
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
@@ -85,8 +85,8 @@ const CreateUsers = () => {
         phone: "",
         office: "",
         role: "",
-        password: "",
-        confirm_password: "",
+        // password: "",
+        // confirm_password: "",
         gender: "",
         is_active: false,
       });
@@ -185,26 +185,9 @@ const CreateUsers = () => {
                                 <option value="Staff">Staff</option>
                             </select>
                             </div>
-                            <div className="form-group">
-                            <label>Password</label>
-                            <input
-                                type="password"
-                                name="password"
-                                value={formData.password}
-                                onChange={handleChange}
-                            />
-                            {errors.password && <span className="error">{errors.password}</span>}
-                            </div>
-                            <div className="form-group">
-                            <label>Confirm Password</label>
-                            <input
-                                type="password"
-                                name="confirm_password"
-                                value={formData.confirm_password}
-                                onChange={handleChange}
-                            />
-                            {errors.confirm_password && <span className="error">{errors.confirm_password}</span>}
-                            </div>
+                            
+                            
+                            
                             <div className="form-group">
                             <label>Gender</label>
                             <select
