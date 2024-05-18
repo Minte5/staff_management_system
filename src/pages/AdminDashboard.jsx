@@ -5,6 +5,7 @@ import SideBar from './SideBar';
 import ListUsers from './ListUsers';
 import CreateUsers from './CreateUsers';
 import CreateProject from './CreateProject';
+import ListProjects from './ListProjects';
 
 import React, { useState, useEffect } from 'react';
 import './AdminPage.css';
@@ -52,6 +53,7 @@ const AdminDashboard = () => {
             <Route path="*/users" element={<ListUsers />} />
             <Route path="*/create-user" element={<CreateUsers />} />
             <Route path="*/create-project" element={<CreateProject />} />
+            <Route path="*/list-projects" element={<ListProjects />} />
         </Routes>
         </div>
         

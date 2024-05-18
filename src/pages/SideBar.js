@@ -18,6 +18,9 @@ const SideBar = () => {
                 <ListGroup.Item as={Link} to="*/create-project" className="bg-success">
                     <span>Create Project</span>
                 </ListGroup.Item>
+                <ListGroup.Item as={Link} to="*/list-projects" className="bg-success">
+                    <span>List Projects</span>
+                </ListGroup.Item>
                 
                     <Dropdown as={Link} to="*/users" className="bg-success">
                         <Dropdown.Toggle   className="bg-success">
