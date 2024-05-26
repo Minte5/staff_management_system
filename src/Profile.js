@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import '/home/mints/Downloads/staff_management_system/src/pages/AdminPage.css';
+import '../src/pages/AdminPage.css';
 
 const Profile = () => {
     const [profile, setProfile] = useState({ name: '', email: '', avatar: '' });

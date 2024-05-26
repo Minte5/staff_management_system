@@ -56,7 +56,7 @@ const ListUsers = () => {
       const storedTokenString = localStorage.getItem('token');
       const token = JSON.parse(storedTokenString);
       // Send a request to your backend to update the user data
-      await axios.put(`http://0.0.0.0:8888/users/${updatedUser.id}`, updatedUser, {
+      await axios.patch(`http://0.0.0.0:8888/users/${updatedUser.id}/`, updatedUser, {
         headers: {
           Authorization: `Token ${token.key}` 
         }
@@ -89,80 +89,141 @@ const ListUsers = () => {
   };
 
   return (
-    <div className='main'>
-      <div className="recentOrders">
-      
-      {users !== null && (
-        <div>
-        <form className="d-flex" role='search'>
-          <input
-            type="text"
-            value={id}
-            onChange={(e) => setSearchId(e.target.value)}
-            placeholder="Search user ID"
-          />
-          <button className="btn btn-success" onClick={handleSearch}>Search</button>
-          {/* <button>Search</button> */}
-          </form>
-          <table className='table'>
-            <thead>
-              <tr className='table-dark'>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Gender</th>
-                <th>Office</th>
-                <th>Role</th>
-                <th>Phone</th>
-                <th>Email</th>
-                <th>Operation</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map(user => (
-                <tr key={user.id}>
-                  <td>{user.first_name}</td>
-                  <td>{user.last_name}</td>
-                  <td>{user.gender}</td>
-                  <td>{user.office}</td>
-                  <td>{user.role}</td>
-                  <td>{user.phone}</td>
-                  <td>{user.email}</td>
-                  <td>
-                    <button onClick={() => handleEditClick(user)} className='btn btn-success'>
-                      Edit
-                    </button>
-                    <button onClick={() => deleteUser(user.id)} className='btn btn-danger'>
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <button onClick={() => navigate('/admin/*/create-user')} className="btn btn-primary">
-              Add User +
-          </button>
+    <div className='container mt-4'>
+      <div className='row'>
+        <div className='col'>
+          <div className='card shadow-sm'>
+            <div className='card-body'>
+              <h1 className='display-6 mb-4'>Users</h1>
+              <form className='row g-2 mb-4' role='search' onSubmit={handleSearch}>
+                <div className='col-md-10'>
+                  <input
+                    type='text'
+                    value={id}
+                    onChange={(e) => setSearchId(e.target.value)}
+                    className='form-control'
+                    placeholder='Search user ID'
+                  />
+                </div>
+                <div className='col-md-2'>
+                  <button className='btn btn-success btn-sm w-100' type='submit'>Search</button>
+                </div>
+              </form>
+              {users !== null && (
+                <div>
+                  <table className='table table-hover'>
+                    <thead className='table-dark'>
+                      <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Gender</th>
+                        <th>Office</th>
+                        <th>Role</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Operation</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {users.map(user => (
+                        <tr key={user.id}>
+                          <td>{user.first_name}</td>
+                          <td>{user.last_name}</td>
+                          <td>{user.gender}</td>
+                          <td>{user.office}</td>
+                          <td>
+                            <span className={`badge ${user.role === 'Admin' ? 'bg-success' : 'bg-secondary'}`}>
+                              {user.role}
+                            </span>
+                          </td>
+                          <td>{user.phone}</td>
+                          <td>{user.email}</td>
+                          <td className='d-flex'>
+                            <button
+                              onClick={() => handleEditClick(user)}
+                              className='btn btn-outline-success btn-sm me-2'
+                            >
+                              Edit
+                            </button>
+                            <button
+                              onClick={() => deleteUser(user.id)}
+                              className='btn btn-outline-danger btn-sm'
+                            >
+                              Delete
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  <button
+                    onClick={() => navigate('/admin/*/create-user')}
+                    className='btn btn-primary mt-3'
+                  >
+                    Add User +
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
-      )}
-
+      </div>
       {selectedUser && (
-        <div className="edit-form">
-          <h3>Edit User</h3>
-          <form onSubmit={(e) => { e.preventDefault(); handleEditSubmit(selectedUser); }}>
-            {/* Input fields for editing user data */}
-            <input type="text" value={selectedUser.first_name} onChange={(e) => setSelectedUser({ ...selectedUser, first_name: e.target.value })} />
-            <input type="text" value={selectedUser.last_name} onChange={(e) => setSelectedUser({ ...selectedUser, last_name: e.target.value })} />
-            <input type="text" value={selectedUser.phone} onChange={(e) => setSelectedUser({ ...selectedUser, phone: e.target.value })} />
-            <input type="email" value={selectedUser.email} onChange={(e) => setSelectedUser({ ...selectedUser, email: e.target.value })} />
-            
-            <button type="submit">Save</button>
-            <button onClick={() => setSelectedUser(null)}>Cancel</button>
-          </form>
+        <div className='row mt-4'>
+          <div className='col'>
+            <div className='card shadow-sm'>
+              <div className='card-body'>
+                <h3 className='card-title'>Edit User</h3>
+                <form onSubmit={(e) => { e.preventDefault(); handleEditSubmit(selectedUser); }}>
+                  <div className='mb-3'>
+                    <label htmlFor='firstName' className='form-label'>First Name</label>
+                    <input
+                      type='text'
+                      id='firstName'
+                      value={selectedUser.first_name}
+                      onChange={(e) => setSelectedUser({ ...selectedUser, first_name: e.target.value })}
+                      className='form-control'
+                    />
+                  </div>
+                  <div className='mb-3'>
+                    <label htmlFor='lastName' className='form-label'>Last Name</label>
+                    <input
+                      type='text'
+                      id='lastName'
+                      value={selectedUser.last_name}
+                      onChange={(e) => setSelectedUser({ ...selectedUser, last_name: e.target.value })}
+                      className='form-control'
+                    />
+                  </div>
+                  <div className='mb-3'>
+                    <label htmlFor='phone' className='form-label'>Phone</label>
+                    <input
+                      type='text'
+                      id='phone'
+                      value={selectedUser.phone}
+                      onChange={(e) => setSelectedUser({ ...selectedUser, phone: e.target.value })}
+                      className='form-control'
+                    />
+                  </div>
+                  <div className='mb-3'>
+                    <label htmlFor='email' className='form-label'>Email</label>
+                    <input
+                      type='email'
+                      id='email'
+                      value={selectedUser.email}
+                      onChange={(e) => setSelectedUser({ ...selectedUser, email: e.target.value })}
+                      className='form-control'
+                    />
+                  </div>
+                  <button type='submit' className='btn btn-success'>Save</button>
+                  <button onClick={() => setSelectedUser(null)} className='btn btn-secondary ms-2'>Cancel</button>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>
-    </div>
-    
   );
 };
 

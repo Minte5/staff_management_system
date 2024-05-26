@@ -21,46 +21,88 @@ body {
   overflow-x: hidden;
 }
 
+.fixed-sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 16.66667%; /* Equivalent to col-2 in Bootstrap */
+    overflow-y: hidden; /* Prevent scrolling */
+    z-index: 100;
+  }
+
+.sidebar a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+}
+
+.sidebar a:hover,
+.sidebar a:focus,
+.sidebar a.active {
+    background-color: #495057;
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #00bcd4; /* Change the color to your preferred accent color */
+}
+
+.sidebar a.active {
+    background-color: #343a40;
+    border-left: 4px solid #00bcd4; /* Change the color to your preferred accent color */
+}
+
+.sidebar .dropdown-menu {
+    background-color: #343a40;
+}
+
+.sidebar .dropdown-item {
+    color: #ffffff;
+}
+
+.sidebar .dropdown-item:hover,
+.sidebar .dropdown-item:focus,
+.sidebar .dropdown-item.active {
+    background-color: #495057;
+    color: #ffffff;
+}
+
 
 
 /* SideBar.css */
-.sidebar-container {
+/* .sidebar-container {
     position: relative;
     width: 100%;;
-}
+} */
 
-.sidebar {
+/* .sidebar {
     position: fixed;
-    width: 200px; /* Adjust the width according to your design */
-    height: 100%; /* Set the sidebar height to cover the entire viewport */
-     /* Change color as needed */
-    /* Change text color as needed */
+    width: 200px;
+    height: 100%; 
     padding-top: 0px;
-    /* */
     background: #3E424B;
     border-left: 10px solid #3E424B;
     transition: 0.5s;
     overflow: hidden;
     
-}
+} */
 
-.sidebar.active {
+/* .sidebar.active {
     width: 100px;
   }
 
 .sidebar ul {
-    list-style-type: none; /* Removes bullet points */
+    list-style-type: none;
     padding: 0;
     position: absolute;
     cursor: pointer;
     left: 0;
     width: 100%;
-}
+} */
 
-.sidebar ul li {
-    /*padding: 10px 20px;
-    cursor: pointer;*/
-
+/* .sidebar ul li {
     position: relative;
     width: 100%;
     list-style: none;
@@ -70,18 +112,18 @@ body {
 
 .sidebar ul li:hover,
 .sidebar ul li.hovered {
-    background-color: var(--white); /* Change hover background color as needed */
-}
+    background-color: var(--white);
+} */
 
 
 
-.sidebar ul li a {
+/* .sidebar ul li a {
     position: relative;
     display: block;
     width: 100%;
     display: flex;
     text-decoration: none;
-    color: var(--white);
+    color: var(--black);
 }
 .sidebar ul li:hover a,
 .sidebar ul li.hovered a {
@@ -108,11 +150,11 @@ body {
     line-height: 60px;
     text-align: start;
     white-space: nowrap;
-}
+} */
   
 
 /* --------- curve outside ---------- */
-.sidebar ul li:hover a::before,
+/* .sidebar ul li:hover a::before,
 .sidebar ul li.hovered a::before {
   content: "";
   position: absolute;
@@ -137,7 +179,7 @@ body {
   border-radius: 50%;
   box-shadow: 35px -35px 0 10px var(--white);
   pointer-events: none;
-}
+} */
 
 .sub-menu{
     background-color: #999;
@@ -289,3 +331,60 @@ button[type="submit"]:hover {
     color: #ff0000;
     font-size: 0.6rem;
 }
+
+.project-card {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+  }
+  
+  .project-card .form-control {
+    background-color: #e9ecef;
+    border: none;
+  }
+  
+  .project-card label {
+    color: #212529;
+  }
+  
+  .project-card button {
+    background-color: #007bff;
+    border: none;
+  }
+  
+  .project-card button:hover {
+    background-color: #0056b3;
+  }
+
+  .project-list-card {
+    border-radius: 15px;
+  }
+  
+  .search-area {
+    margin-bottom: 20px;
+  }
+  
+  .project-item {
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .project-link {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  .project-actions {
+    margin-top: 10px;
+  }
+  
+  .project-actions button {
+    margin-right: 10px;
+  }
+  
+  .row-clickable:hover {
+    cursor: pointer;
+    background-color: #f8f9fa;
+  }
+  

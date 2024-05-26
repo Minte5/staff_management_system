@@ -44,24 +44,23 @@ const AdminDashboard = () => {
 
 
   return (
-    
-      <div >
-        
-        
-        <SideBar />
-        <div className="content">
-        <Routes>
-            <Route path="*/users" element={<ListUsers />} />
-            <Route path="*/create-user" element={<CreateUsers />} />
-            <Route path="*/create-project" element={<CreateProject />} />
-            <Route path="*/list-projects" element={<ListProjects />} />
-            <Route path="*/profile" element={<Profile />} />
-        </Routes>
+    <div className="container-fluid">
+        <div className="row">
+            <div className="col-2 p-0">
+                <SideBar />
+            </div>
+            <div className="col-10 content p-1">
+                <Routes>
+                    <Route path="*/users" element={<ListUsers />} />
+                    <Route path="*/create-user" element={<CreateUsers />} />
+                    <Route path="*/create-project" element={<CreateProject />} />
+                    <Route path="*/list-projects" element={<ListProjects />} />
+                    <Route path="*/profile" element={<Profile />} />
+                </Routes>
+            </div>
         </div>
-        
-      </div>
-   
-  );
+    </div>
+);
 };
 
 

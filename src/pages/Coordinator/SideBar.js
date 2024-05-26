@@ -1,5 +1,4 @@
-import '/home/mints/Downloads/staff_management_system/src/pages/AdminPage.css';
-import { useNavigate, Link  } from 'react-router-dom';
+import '../AdminPage.css';import { useNavigate, Link  } from 'react-router-dom';
 import axios from 'axios'; // Import Axios
 import Dropdown from 'react-bootstrap/Dropdown';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS

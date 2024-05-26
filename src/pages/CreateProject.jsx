@@ -40,52 +40,65 @@ const CreateProject = () => {
   };
 
   return (
-    <div className='main'>
-        <div className="recentOrders">
-        <h2>Create Project</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Project Name</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            maxLength={100}
-            required
-          />
+    <div className="container mt-5">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <div className="card project-card shadow rounded">
+            <div className="card-body">
+              <h2 className="mb-4 text-center">Create Project</h2>
+              <form onSubmit={handleSubmit}>
+                <div className="mb-3 form-floating">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    maxLength={100}
+                    required
+                  />
+                  <label htmlFor="name">Project Name</label>
+                </div>
+                <div className="mb-3 form-floating">
+                  <textarea
+                    className="form-control"
+                    id="description"
+                    name="description"
+                    value={formData.description}
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="description">Project Description</label>
+                </div>
+                <div className="mb-3 form-floating">
+                  <input
+                    type="date"
+                    className="form-control"
+                    id="expected_start_date"
+                    name="expected_start_date"
+                    value={formData.expected_start_date}
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="expected_start_date">Expected Start Date</label>
+                </div>
+                <div className="mb-3 form-floating">
+                  <input
+                    type="date"
+                    className="form-control"
+                    id="expected_end_date"
+                    name="expected_end_date"
+                    value={formData.expected_end_date}
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="expected_end_date">Expected End Date</label>
+                </div>
+                <button type="submit" className="btn btn-primary">Create</button>
+              </form>
+            </div>
+          </div>
         </div>
-        <div className="form-group">
-          <label>Project Description</label>
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label>Expected Start Date</label>
-          <input
-            type="date"
-            name="expected_start_date"
-            value={formData.expected_start_date}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label>Expected End Date</label>
-          <input
-            type="date"
-            name="expected_end_date"
-            value={formData.expected_end_date}
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit">Create</button>
-      </form>
-        </div>
+      </div>
     </div>
-    
   );
 };
 

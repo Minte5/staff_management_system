@@ -7,6 +7,7 @@ const ListProjects = () => {
     const [projects, setProjects] = useState([]);
     const [error, setError] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchProjects = async () => {
@@ -91,51 +92,62 @@ const ListProjects = () => {
         }
     };
 
+    
+
     return (
-        <div className='main'>
-            <div className="recentOrders">
-                <div className="search-area">
-                    <h1>Project List</h1>
+        <div className="container mt-5">
+          <div className="row justify-content-center">
+            <div className="col-md-10">
+              <div className="card project-list-card shadow">
+                <div className="card-body">
+                  <h1 className="mb-4">Project List</h1>
+                  <div className="search-area mb-4">
                     <input
-                        type="number"
-                        placeholder="Search projects Using ID..."
-                        value={searchQuery}
-                        onChange={(e, projectId) => handleSearchChange(e, projectId)}
+                      type="number"
+                      className="form-control"
+                      placeholder="Search projects by ID..."
+                      value={searchQuery}
+                      onChange={handleSearchChange}
                     />
-                    {error && <p>{error}</p>}
-
-                    {filteredProjects.map(project => (
-                        <Link key={project.id} to={`/project-details/${project.id}`} className="recentOrders" style={{ color: 'inherit', textDecoration: 'none' }}>
-                            <div>
-                                <h3>{project.name}</h3>
-                                {/*<p>Description: {project.description}</p>*/}
-                                <p>Start Date: {project.expected_start_date} ----------- End Date: {project.expected_end_date}</p>
-                                {/*<p>End Date: {project.expected_end_date}</p>
-                                <p>Owner: {project.owner}</p>
-                                <p>Created At: {project.created_at}</p>
-                                <p>Updated At: {project.updated_at}</p>
-                                <p>Id: {project.id}</p>*/}
-                                <div>
-                                    <button className="edit" onClick={() => handleEdit(project.id)}>
-                                        Edit
-                                    </button>
-                                    <button className="delete" onClick={() => handleDelete(project.id)}>
-                                        Delete
-                                    </button>
-                                </div>
-                            </div>
-                        </Link>
-                    ))}
-
-
-
-
-                    
-
+                    {error && <p className="text-danger">{error}</p>}
+                  </div>
+                  <div className="text-left mb-3">
+                  <button
+                    onClick={() => navigate('/admin/*/create-project')}
+                    className='btn btn-primary mt-3'
+                  >
+                    Create Project +
+                  </button>
+                  </div>
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filteredProjects.map(project => (
+                        <tr key={project.id} className="row-clickable" onClick={() => (project.id)}>
+                          <td><Link to={`/project-details/${project.id}`}>{project.name}</Link></td>
+                          <td>{project.expected_start_date}</td>
+                          <td>{project.expected_end_date}</td>
+                          <td>
+                            <button className="btn btn-primary" onClick={() => handleEdit(project.id)}>Edit</button>
+                            <button className="btn btn-danger" onClick={() => handleDelete(project.id)}>Delete</button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-    );
+      );
 };
 
 export default ListProjects;

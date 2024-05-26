@@ -32,6 +32,22 @@ const CreateUsers = () => {
     }));
   };
 
+  const [roles, setRoles] = useState([]);
+
+  const handleRoleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'office') {
+      setFormData({ ...formData, [name]: value });
+      // Update roles based on selected office
+      if (value === 'HOD') {
+        setRoles(['Administrator']);
+      } else {
+        setRoles(['Staff', 'Coordinator']);
+      }
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
 
 
   const handleSubmit = async (e) => {
@@ -105,127 +121,145 @@ const CreateUsers = () => {
 
 
   
-    return(
-
-        
-        <div className='main'>
-            <div className="recentOrders">
-            <div className='content'>
-                <div className="create-user-form">
-                    <h2>Create User</h2>
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <label>Username</label>
-                            <input
-                                type="text"
-                                name="username"
-                                value={formData.username}
-                                onChange={handleChange}
-                            />
-                            {errors.username && <span className="error">{errors.username}</span>}
-                            </div>
-                            <div className="form-group">
-                            <label>First Name</label>
-                            <input
-                                type="text"
-                                name="first_name"
-                                value={formData.first_name}
-                                onChange={handleChange}
-                            />
-                            </div>
-                            <div className="form-group">
-                            <label>Last Name</label>
-                            <input
-                                type="text"
-                                name="last_name"
-                                value={formData.last_name}
-                                onChange={handleChange}
-                            />
-                            </div>
-                            <div className="form-group">
-                            <label>Email Address</label>
-                            <input
-                                type="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                            />
-                            {errors.email && <span className="error">{errors.email}</span>}
-                            </div>
-                            <div className="form-group">
-                            <label>Phone</label>
-                            <input
-                                type="text"
-                                name="phone"
-                                value={formData.phone}
-                                onChange={handleChange}
-                            />
-                            </div>
-                            <div className="form-group">
-                            <label>Office</label>
-                            <select
-                                name="office"
-                                value={formData.office}
-                                onChange={handleChange}
-                            >
-                                <option value="">Select</option>
-                                <option value="HOD">HOD</option>
-                                <option value="UG">UG</option>
-                                <option value="PG">PG</option>
-                                <option value="TA">TA</option>
-                            </select>
-                            </div>
-                            <div className="form-group">
-                            <label>Role</label>
-                            <select
-                                name="role"
-                                value={formData.role}
-                                onChange={handleChange}
-                            >
-                                <option value="">Select</option>
-                                <option value="Administrator">Administrator</option>
-                                <option value="Coordinator">Coordinator</option>
-                                <option value="Staff">Staff</option>
-                            </select>
-                            </div>
-                            
-                            
-                            
-                            <div className="form-group">
-                            <label>Gender</label>
-                            <select
-                                name="gender"
-                                value={formData.gender}
-                                onChange={handleChange}
-                            >
-                                <option value="">Select</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </select>
-                            </div>
-                            <div className="form-group">
-                            <label>Active:</label>
-                            <input 
-                                type="checkbox" 
-                                name="isActive" 
-                                checked={formData.is_active}
-                                onChange={(e) => setFormData({ ...formData, is_active: e.target.checked })}
-                                
-                            />
-                        </div>
-                        <button type="submit">Submit</button>
-                    </form>
+return (
+  <div className="container mt-5">
+    <div className="row justify-content-center">
+      <div className="col-md-6">
+        <div className="card shadow-sm r-4">
+          <div className="card-body">
+            <h2 className="mb-4 text-center">Create User</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="mb-3 form-floating">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="username"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleChange}
+                />
+                <label htmlFor="username">Username</label>
+              </div>
+              <div className="row mb-3">
+                <div className="col">
+                  <div className="form-floating">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="first_name"
+                      name="first_name"
+                      value={formData.first_name}
+                      onChange={handleChange}
+                    />
+                    <label htmlFor="first_name">First Name</label>
+                  </div>
                 </div>
-            </div>
-            </div>
-            
-            
+                <div className="col">
+                  <div className="form-floating">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="last_name"
+                      name="last_name"
+                      value={formData.last_name}
+                      onChange={handleChange}
+                    />
+                    <label htmlFor="last_name">Last Name</label>
+                  </div>
+                </div>
+              </div>
+              <div className="mb-3 form-floating">
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+                <label htmlFor="email">Email Address</label>
+                {errors.email && <span className="text-danger">{errors.email}</span>}
+              </div>
+              <div className="mb-3 form-floating">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                />
+                <label htmlFor="phone">Phone</label>
+              </div>
+              <div className="row mb-3">
+                <div className="col">
+                  <div className="form-floating">
+                    <select
+                      className="form-select"
+                      id="office"
+                      name="office"
+                      value={formData.office}
+                      onChange={handleChange}
+                    >
+                      <option value="">Select</option>
+                      <option value="UG">UG</option>
+                      <option value="PG">PG</option>
+                      <option value="TA">TA</option>
+                    </select>
+                    <label htmlFor="office">Office</label>
+                  </div>
+                </div>
+                <div className="col">
+                  <div className="form-floating">
+                    <select
+                      className="form-select"
+                      id="role"
+                      name="role"
+                      value={formData.role}
+                      onChange={handleChange}
+                      disabled={!formData.office}
+                    >
+                      <option value="">Select</option>
+                      <option value="Staff">Staff</option>
+                      <option value="Coordinator">Coordinator</option>
+                    </select>
+                    <label htmlFor="role">Role</label>
+                  </div>
+                </div>
+              </div>
+              <div className="mb-3 form-floating">
+                <select
+                  className="form-select"
+                  id="gender"
+                  name="gender"
+                  value={formData.gender}
+                  onChange={handleChange}
+                >
+                  <option value="">Select</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+                <label htmlFor="gender">Gender</label>
+              </div>
+              <div className="mb-3 form-check">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id="is_active"
+                  name="is_active"
+                  checked={formData.is_active}
+                  onChange={(e) => setFormData({ ...formData, is_active: e.target.checked })}
+                />
+                <label className="form-check-label" htmlFor="is_active">Active</label>
+              </div>
+              <button type="submit" className="btn btn-primary">Submit</button>
+            </form>
+          </div>
         </div>
-        
-                
-
-        
-    );
+      </div>
+    </div>
+  </div>
+);
 };
 
 

@@ -1,8 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import SideBar from '../SideBar';
-import '/home/mints/Downloads/staff_management_system/src/pages/AdminPage.css';
-
+import '../../AdminPage.css';
 const TaCoord = () => {
   const token = localStorage.getItem('token');
   

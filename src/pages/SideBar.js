@@ -8,42 +8,28 @@ import { Container, ListGroup } from 'react-bootstrap';
 
 
 const SideBar = () => {
-    return(
-        <div className="sidebar">
+    return (
+        <div className="sidebar bg-dark text-white vh-100 p-3 sticky">
+          <ul className="nav flex-column">
+            <li className="nav-item">
+              <Link to="*/users" className="nav-link text-white">
+                Users
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="*/list-projects" className="nav-link text-white">
+                Projects
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="*/list-projects" className="nav-link text-white">
+                Events
+              </Link>
+            </li>
             
-            <ListGroup variant="flush">
-                <ListGroup.Item as={Link} to="*/create-user" className="bg-success">
-                    <span>Create User</span>
-                </ListGroup.Item>
-                <ListGroup.Item as={Link} to="*/create-project" className="bg-success">
-                    <span>Create Project</span>
-                </ListGroup.Item>
-                <ListGroup.Item as={Link} to="*/list-projects" className="bg-success">
-                    <span>List Projects</span>
-                </ListGroup.Item>
-                
-                    <Dropdown as={Link} to="*/users" className="bg-success">
-                        <Dropdown.Toggle   className="bg-success">
-                            <span className="title" >List Users</span>
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu>
-                            <Dropdown.Item href="#/action-1">Action 1</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Action 2</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">Action 3</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                
-            
-            </ListGroup>
-            
-
-
-            
-            
-            
+          </ul>
         </div>
-    )
-}
+      );
+};
 
 export default SideBar;

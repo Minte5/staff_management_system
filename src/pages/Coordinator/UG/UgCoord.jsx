@@ -2,6 +2,7 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 import SideBar from '../SideBar';
 
+
 const UgCoord = () => {
   const token = localStorage.getItem('token');
   

@@ -1,5 +1,4 @@
-import '/home/mints/Downloads/staff_management_system/src/pages/AdminPage.css';
-import { useNavigate, Link  } from 'react-router-dom';
+import '../AdminPage.css';import { useNavigate, Link  } from 'react-router-dom';
 import axios from 'axios'; // Import Axios
 import Dropdown from 'react-bootstrap/Dropdown';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
@@ -13,13 +12,13 @@ const SideBar = () => {
             
             <ListGroup variant="flush">
                 <ListGroup.Item as={Link} to="*/create-user" className="bg-success">
-                    <span>Create User</span>
+                    <span>Users</span>
                 </ListGroup.Item>
                 <ListGroup.Item as={Link} to="*/create-project" className="bg-success">
-                    <span>Create Project</span>
+                    <span>Projects</span>
                 </ListGroup.Item>
                 <ListGroup.Item as={Link} to="*/list-projects" className="bg-success">
-                    <span>List Projects</span>
+                    <span>Events</span>
                 </ListGroup.Item>
                 
                     <Dropdown as={Link} to="*/users" className="bg-success">
