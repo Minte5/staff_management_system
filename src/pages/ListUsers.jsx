@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './AdminPage.css';
+import { useNavigate, Link  } from 'react-router-dom';
 
 const ListUsers = () => {
   const [users, setUsers] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null); // Track selected user for editing
   const [id, setSearchId] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -137,6 +139,9 @@ const ListUsers = () => {
               ))}
             </tbody>
           </table>
+          <button onClick={() => navigate('/admin/*/create-user')} className="btn btn-primary">
+              Add User +
+          </button>
         </div>
       )}
 

@@ -38,6 +38,9 @@ const Navbar = () => {
             console.error('Logout error:', error);
         });
     };
+    const handleProfile = () => {
+        navigate('/admin/*/profile');
+    };
 
     return (
         <nav>
@@ -52,7 +55,10 @@ const Navbar = () => {
                 </ul>
             </div>
 
-            <div>
+            <div className="navbar-buttons">
+                <button onClick={handleProfile} className='profile-button'>
+                    <img src="/logo.png" alt="Profile" className="avatar" />
+                </button>
                 <button onClick={handleLogout} className='btn btn-primary'>Logout</button>
             </div>
 

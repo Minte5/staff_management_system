@@ -33,29 +33,31 @@ const Login = ({ onLogin }) => {
 
         if (role === 'Administrator') {
           navigate('/admin/*/users');
-        } else if (role === 'Coordinator') {
+        } 
+        else if (role === 'Coordinator') {
           if(office === 'PG'){
-            navigate('/user1');
+            navigate('/pgcoord');
           }
           else if(office === 'UG'){
-            navigate('/user1');
+            navigate('/ugcoord');
           }
           else if(office === 'TA'){
-            navigate('/user1');
+            navigate('/tacoord');
           }
           else {
             setLoginError(true);
           }
           
-        } else if (role === 'Staff') {
+        } 
+        else if (role === 'Staff') {
           if(office === 'PG'){
-            navigate('/user1');
+            navigate('/pgstaff');
           }
           else if(office === 'Ug'){
-            navigate('/user1');
+            navigate('/ugstaff');
           }
           else if(office === 'Ta'){
-            navigate('/user1');
+            navigate('/tastaff');
           }
           else {
             setLoginError(true);

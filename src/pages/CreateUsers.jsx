@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './AdminPage.css';
+import { useNavigate } from 'react-router-dom';
 
 
 const CreateUsers = () => {
@@ -20,6 +21,7 @@ const CreateUsers = () => {
         is_active: false,
       });
       const [errors, setErrors] = useState({});
+      const navigate = useNavigate();
     // CREATING USER
 
   const handleChange = (e) => {
@@ -92,6 +94,7 @@ const CreateUsers = () => {
       });
       setErrors({});
       alert('User created successfully');
+      navigate('/admin/*/list-users');
     } catch (error) {
       
       console.error('Error creating user:', error);

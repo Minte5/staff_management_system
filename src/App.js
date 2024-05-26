@@ -2,9 +2,20 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes , useLocation} from 'react-router-dom';
 import Login from './pages/Login';
 import Navbar from './components/Navbar';
-import AdminPage from './pages/AdminDashboard';
-import UserPage1 from './pages/UserPage1';
+
+import PgCoord from './pages/Coordinator/PG/PgCoord';
+import TaCoord from './pages/Coordinator/TA/TaCoord';
+import UgCoord from './pages/Coordinator/UG/UgCoord';
+
+import PgStaff from './pages/Staff/PG/PgStaff';
+import TaStaff from './pages/Staff/TA/TaStaff';
+import UgStaff from './pages/Staff/UG/UgStaff';
+
+import Profile from './Profile';
+
 import UserPage2 from './pages/UserPage2';
+import UserPage1 from './pages/UserPage1';
+
 import ForgotPassword from './pages/ForgotPassword';
 import ForgotPasswordConfirm from './pages/ForgotPasswordConfirm';
 import SetNewPassword from './pages/SetNewPassword';
@@ -40,8 +51,19 @@ const AppContent = () => {
         <Route path="/forgot-password-confirm" element={<ForgotPasswordConfirm />} />
         <Route path="/set_password" element={<SetNewPassword />} />
         <Route path="/admin/*" element={<AdminDashboard />} />
+
+        <Route path="/pgcoord" element={<PgCoord />} />
+        <Route path="/tacoord" element={<TaCoord />} />
+        <Route path="/ugcoord" element={<UgCoord />} />
+
+        <Route path="/pgstaff" element={<PgStaff />} />
+        <Route path="/tastaff" element={<TaStaff />} />
+        <Route path="/ugstaff" element={<UgStaff />} />
+
         <Route path="/user1" element={<UserPage1 />} />
         <Route path="/user2" element={<UserPage2 />} />
+
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   );

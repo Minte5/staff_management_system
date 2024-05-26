@@ -36,7 +36,7 @@ const SideBar = () => {
                 
             
             </ListGroup>
-            <li ><a><span className='title'>Menu Item 1</span></a></li>
+            
 
 
             
