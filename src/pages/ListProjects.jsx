@@ -63,10 +63,8 @@ const ListProjects = () => {
                 }
             });
 
-            // Now you have the project details in the response.data
             console.log("Project details:", response.data);
-            // You can then navigate to a different page/component for editing,
-            // passing the project details as props, or update state to show an editing form
+            
         } catch (error) {
             console.error('Error fetching project details:', error);
             setError('Error fetching project details');
@@ -131,12 +129,13 @@ const ListProjects = () => {
                     <tbody>
                       {filteredProjects.map(project => (
                         <tr key={project.id} className="row-clickable" onClick={() => (project.id)}>
-                          <td><Link to={`/project-details/${project.id}`}>{project.name}</Link></td>
+                          <td><Link to={`/admin/*/project-details/${project.id}`}>{project.name}</Link></td>
                           <td>{project.expected_start_date}</td>
                           <td>{project.expected_end_date}</td>
                           <td>
                             <button className="btn btn-primary" onClick={() => handleEdit(project.id)}>Edit</button>
                             <button className="btn btn-danger" onClick={() => handleDelete(project.id)}>Delete</button>
+                            <button className="btn btn-secondary" onClick={() => navigate(`/admin/*/project-details/${project.id}`)}>View Details</button>
                           </td>
                         </tr>
                       ))}

@@ -22,8 +22,18 @@ const SideBar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="*/list-projects" className="nav-link text-white">
+              <Link to="*/list-events" className="nav-link text-white">
                 Events
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="*/list-projects" className="nav-link text-white">
+                UG Sections
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="*/list-messages" className="nav-link text-white">
+                Message
               </Link>
             </li>
             
