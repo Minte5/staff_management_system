@@ -16,7 +16,7 @@ const Profile = () => {
                 const storedTokenString = localStorage.getItem('token');
                 const token = JSON.parse(storedTokenString);
 
-                const userResponse = await axios.get('http://0.0.0.0:8888/users/', {
+                const userResponse = await axios.get('http://0.0.0.0:8888/auth/get_profile/', {
                     headers: {
                         'Authorization': `Token ${token.key}`
                     }
@@ -24,7 +24,7 @@ const Profile = () => {
 
                 setUserId(userResponse.data.id);
 
-                const profileResponse = await axios.get(`http://0.0.0.0:8888/users/1/`, {
+                const profileResponse = await axios.get(`http://0.0.0.0:8888/auth/get_profile/`, {
                     headers: {
                         'Authorization': `Token ${token.key}`
                     }
@@ -52,7 +52,7 @@ const Profile = () => {
             const storedTokenString = localStorage.getItem('token');
             const token = JSON.parse(storedTokenString);
 
-            const response = await axios.put(`http://0.0.0.0:8888/users/${userId}/`, profile, {
+            const response = await axios.patch(`http://0.0.0.0:8888/users/${userId}/`, profile, {
                 headers: {
                     'Authorization': `Token ${token.key}`,
                     'Content-Type': 'application/json'
