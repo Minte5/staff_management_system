@@ -1,13 +1,12 @@
-// ProjectDetails.js
 import React, { useState, useEffect } from 'react';
-import { useParams , useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const ProjectDetails = () => {
     const { id } = useParams();
     const [project, setProject] = useState(null);
     const [error, setError] = useState(null);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProjectDetails = async () => {
@@ -15,15 +14,16 @@ const ProjectDetails = () => {
                 const storedTokenString = localStorage.getItem('token');
                 const token = JSON.parse(storedTokenString);
 
-                const response = await axios.get(`http://0.0.0.0:8888/project/${id}`, {
+                const response = await axios.get(`http://your-backend-url/project/${project.id}`, {
                     headers: {
                         Authorization: `Token ${token.key}`
                     }
                 });
+
                 setProject(response.data);
             } catch (error) {
                 console.error('Error fetching project details:', error);
-                setError('Error fetching project details');
+                setError('Error fetching project details. Please try again later.');
             }
         };
 
@@ -39,7 +39,6 @@ const ProjectDetails = () => {
     }
 
     return (
-        
         <div className="container mt-5">
             <div className="row justify-content-center">
                 <div className="col-md-10">

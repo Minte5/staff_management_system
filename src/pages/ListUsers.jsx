@@ -5,7 +5,7 @@ import { useNavigate, Link  } from 'react-router-dom';
 
 const ListUsers = () => {
   const [users, setUsers] = useState(null);
-  const [selectedUser, setSelectedUser] = useState(null); // Track selected user for editing
+  const [selectedUser, setSelectedUser] = useState(null); 
   const [id, setSearchId] = useState('');
   const navigate = useNavigate();
 
@@ -26,21 +26,21 @@ const ListUsers = () => {
       }
     };
 
-    fetchUsers(); // Call the fetchUsers function
+    fetchUsers(); 
   }, []);
 
   const deleteUser = async (userId) => {
     try {
       const storedTokenString = localStorage.getItem('token');
       const token = JSON.parse(storedTokenString);
-      // Send a request to your backend to delete the user
+      
       await axios.delete(`http://0.0.0.0:8888/users/${userId}`, {
         headers: {
           Authorization: `Token ${token.key}` 
         }
       });
       
-      // Update the users state to remove the deleted user
+      
       setUsers(users.filter(user => user.id !== userId));
     } catch (error) {
       console.error('Error deleting user:', error);
@@ -48,23 +48,23 @@ const ListUsers = () => {
   };
   
   const handleEditClick = (user) => {
-    setSelectedUser(user); // Set the selected user for editing
+    setSelectedUser(user); 
   };
   
   const handleEditSubmit = async (updatedUser) => {
     try {
       const storedTokenString = localStorage.getItem('token');
       const token = JSON.parse(storedTokenString);
-      // Send a request to your backend to update the user data
+      
       await axios.patch(`http://0.0.0.0:8888/users/${updatedUser.id}/`, updatedUser, {
         headers: {
           Authorization: `Token ${token.key}` 
         }
       });
       
-      // Update the users state with the updated user data
+      
       setUsers(users.map(user => (user.id === updatedUser.id ? updatedUser : user)));
-      setSelectedUser(null); // Reset selected user after submitting edits
+      setSelectedUser(null); 
     } catch (error) {
       console.error('Error updating user:', error);
     }
@@ -80,11 +80,11 @@ const ListUsers = () => {
           Authorization: `Token ${token.key}` 
         }
       });
-      setUsers(response.data ? [response.data] : []); // If user found, set it as the only user, otherwise set an empty array
+      setUsers(response.data ? [response.data] : []); 
       console.log(id);
     } catch (error) {
       console.error('Error searching user:', error);
-      setUsers([]); // If error occurred, set users to empty array
+      setUsers([]); 
     }
   };
 

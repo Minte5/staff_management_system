@@ -14,7 +14,7 @@ const ListMessages = () => {
                 const storedTokenString = localStorage.getItem('token');
                 const token = JSON.parse(storedTokenString);
 
-                const response = await axios.get('http://0.0.0.0:8888/messages/', {
+                const response = await axios.get('http://0.0.0.0:8888/notifications/', {
                     headers: {
                         Authorization: `Token ${token.key}`
                     }
@@ -85,9 +85,9 @@ const ListMessages = () => {
                   <div className="message-list">
                     {messages.map(message => (
                       <div key={message.id} className="message-item mb-3">
-                        <h2><Link to={`/admin/*/message-details/${message.id}`}>{message.title}</Link></h2>
-                        <p>{message.content}</p>
-                        <p><small>{message.date}</small></p>
+                        <h2><Link to={`/admin/*/message-details/${message.id}`}>{message.verb}</Link></h2>
+                        <p>{message.description}</p>
+                        <p><small>{message.timestamp}</small></p>
                         <div className="actions">
                           <button className="btn btn-primary mr-2" onClick={() => handleEdit(message.id)}>Edit</button>
                           <button className="btn btn-danger mr-2" onClick={() => handleDelete(message.id)}>Delete</button>
