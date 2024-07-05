@@ -19,14 +19,14 @@ const CreateMessage = () => {
     const fetchUsers = async () => {
         try {
             const storedTokenString = localStorage.getItem('token');
-                const token = JSON.parse(storedTokenString);
+            const token = JSON.parse(storedTokenString);
 
-                const response = await axios.get('http://0.0.0.0:8888/users/', {
+            const response = await axios.get('http://0.0.0.0:8888/users/', {
                 headers: {
-                    Authorization: `Token ${token.key}` 
+                    Authorization: `Token ${token.key}`
                 }
             });
-            //const response = await axios.get('http://0.0.0.0:8888/users/');
+
             setUsers(response.data);
         } catch (error) {
             console.error('Error fetching users:', error);
@@ -61,14 +61,14 @@ const CreateMessage = () => {
     };
 
     const onSuggestionSelected = (event, { suggestion }) => {
-        setFormData({ ...formData, recipient: suggestion.email });
+        setFormData({ ...formData, recipient: `${suggestion.first_name} ${suggestion.last_name}` });
     };
 
-    const getSuggestionValue = (suggestion) => suggestion.email;
+    const getSuggestionValue = (suggestion) => `${suggestion.first_name} ${suggestion.last_name}`;
 
     const renderSuggestion = (suggestion) => (
         <div>
-            {suggestion.email}
+            {suggestion.first_name} {suggestion.last_name}
         </div>
     );
 
@@ -95,8 +95,8 @@ const CreateMessage = () => {
                 }
             });
 
-            console.log('Email sent successfully:', response.data);
-            // Reset form after successful submission
+            console.log('Message sent successfully:', response.data);
+            
             setFormData({
                 recipient: '',
                 message: '',
