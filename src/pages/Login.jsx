@@ -22,7 +22,8 @@ const Login = ({ onLogin }) => {
       });
 
       if (response.status === 200) {
-        const { role, token ,office} = response.data;
+        const { roles, role, token ,office} = response.data;
+        console.log('Stored data:', response.data);
         
        
         const tokenString = JSON.stringify(token);
@@ -31,34 +32,32 @@ const Login = ({ onLogin }) => {
         localStorage.setItem('token', tokenString);
         console.log('Stored Token:', token);
 
-        if (role === 'Administrator') {
+       
+
+        if (roles[0].office === 'HOD' || roles[0].office === 'DEVELOPER') {
           navigate('/admin/*/users');
         } 
-        else if (role === 'Coordinator') {
-          if(office === 'PG'){
-            navigate('/pgcoord');
+        else if (roles[0].office === 'PG') {
+          if(roles[0].role === 'Coordinator'){
+            navigate('/pgcoord/*');
           }
-          else if(office === 'UG'){
+          else if(roles[0].role === 'Staff'){
             navigate('/ugcoord');
           }
-          else if(office === 'TA'){
-            navigate('/tacoord');
-          }
+         
           else {
             setLoginError(true);
           }
           
         } 
-        else if (role === 'Staff') {
-          if(office === 'PG'){
+        else if (roles[0].office === 'UG') {
+          if(roles[0].role === 'Head'){
             navigate('/pgstaff');
           }
-          else if(office === 'Ug'){
+          else if(roles[0].role === 'Staff'){
             navigate('/ugstaff');
           }
-          else if(office === 'Ta'){
-            navigate('/tastaff');
-          }
+          
           else {
             setLoginError(true);
           }

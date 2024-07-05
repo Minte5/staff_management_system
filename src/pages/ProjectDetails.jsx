@@ -14,9 +14,12 @@ const ProjectDetails = () => {
                 const storedTokenString = localStorage.getItem('token');
                 const token = JSON.parse(storedTokenString);
 
-                const response = await axios.get(`http://your-backend-url/project/${project.id}`, {
+                console.log('Error fetching project details:', id);
+                const response = await axios.get(`http://0.0.0.0:8888/project/${id}`, {
+                    withCredentials: true,
                     headers: {
-                        Authorization: `Token ${token.key}`
+                        'Content-Type':'application/json',
+                        'Authorization': `Token ${token.key}`
                     }
                 });
 
@@ -27,8 +30,11 @@ const ProjectDetails = () => {
             }
         };
 
-        fetchProjectDetails();
-    }, [id]);
+        
+        if (id) {
+            fetchProjectDetails();
+        }
+    },[id]);
 
     if (error) {
         return <p className="text-danger">{error}</p>;
@@ -44,12 +50,12 @@ const ProjectDetails = () => {
                 <div className="col-md-10">
                     <div className="card project-details-card shadow">
                         <div className="card-body">
-                            <h1 className="mb-4">Project List</h1>
+                            <h1 className="mb-4">Project Details</h1>
                             <h1 className="mb-4">{project.name}</h1>
                             <p><strong>Start Date:</strong> {project.expected_start_date}</p>
                             <p><strong>End Date:</strong> {project.expected_end_date}</p>
                             <p><strong>Description:</strong> {project.description}</p>
-                            {/* Add more project details here as needed */}
+                            
                             <button className="btn btn-primary mt-3" onClick={() => navigate(`/edit-project/${id}`)}>Edit Project</button>
                         </div>
                     </div>

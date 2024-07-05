@@ -105,7 +105,7 @@ const ListProjects = () => {
 
             await axios.delete(`http://0.0.0.0:8888/project/${projectId}`, {
                 headers: {
-                    Authorization: `Token ${token.key}`
+                    'Authorization': `Token ${token.key}`
                 }
             });
             // After successful deletion, update the project list

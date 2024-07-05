@@ -52,11 +52,11 @@ const AppContent = () => {
         <Route path="/set_password" element={<SetNewPassword />} />
         <Route path="/admin/*" element={<AdminDashboard />} />
 
-        <Route path="/pgcoord" element={<PgCoord />} />
+        <Route path="/coord/*" element={<PgCoord />} />
         <Route path="/tacoord" element={<TaCoord />} />
         <Route path="/ugcoord" element={<UgCoord />} />
 
-        <Route path="/pgstaff" element={<PgStaff />} />
+        <Route path="/staff/*" element={<PgStaff />} />
         <Route path="/tastaff" element={<TaStaff />} />
         <Route path="/ugstaff" element={<UgStaff />} />
 

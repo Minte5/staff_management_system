@@ -130,11 +130,11 @@ const ListUsers = () => {
                           <td>{user.first_name}</td>
                           <td>{user.last_name}</td>
                           <td>{user.gender}</td>
-                          <td>{user.office}</td>
+                          <td>{user.roles && user.roles[0] ? user.roles[0].office : 'N/A'}</td>
                           <td>
-                            <span className={`badge ${user.role === 'Admin' ? 'bg-success' : 'bg-secondary'}`}>
-                              {user.role}
-                            </span>
+                            
+                            {user.roles && user.roles[0] ? user.roles[0].role : 'N/A'}
+                            
                           </td>
                           <td>{user.phone}</td>
                           <td>{user.email}</td>

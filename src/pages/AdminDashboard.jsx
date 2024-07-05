@@ -67,6 +67,7 @@ const AdminDashboard = () => {
                     <Route path="*/event-scheduler" element={<EventScheduler />} />
                     <Route path="*/profile" element={<Profile />} />
                     <Route path="*/project-details/:id" element={<ProjectDetails />} />
+                    
                     <Route path="*/list-messages" element={<ListMessages />} />
                     <Route path="*/create-message" element={<CreateMessage />} />
                     <Route path="*/list-sections" element={<ListSections />} />

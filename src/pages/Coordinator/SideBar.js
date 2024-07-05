@@ -12,10 +12,13 @@ const SideBar = () => {
             
             <ListGroup variant="flush">
                 <ListGroup.Item as={Link} to="*/create-user" className="bg-success">
-                    <span>List User</span>
+                    <span>Users</span>
                 </ListGroup.Item>
                 <ListGroup.Item as={Link} to="*/list-projects" className="bg-success">
-                    <span>List Project</span>
+                    <span>Projects</span>
+                </ListGroup.Item>
+                <ListGroup.Item as={Link} to="*/list-projects" className="bg-success">
+                    <span>Events</span>
                 </ListGroup.Item>
                 <ListGroup.Item as={Link} to="*/list-projects" className="bg-success">
                     <span>Events</span>
