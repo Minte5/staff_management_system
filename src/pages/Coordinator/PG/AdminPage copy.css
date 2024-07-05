@@ -1,0 +1,390 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+
+/* =============== Globals ============== */
+* {
+  font-family: "Ubuntu", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --blue: #2a2185;
+  --white: #fff;
+  --gray: #f5f5f5;
+  --black1: #222;
+  --black2: #999;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.fixed-sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 16.66667%; /* Equivalent to col-2 in Bootstrap */
+    overflow-y: hidden; /* Prevent scrolling */
+    z-index: 100;
+  }
+
+.sidebar a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+}
+
+.sidebar a:hover,
+.sidebar a:focus,
+.sidebar a.active {
+    background-color: #495057;
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #00bcd4; /* Change the color to your preferred accent color */
+}
+
+.sidebar a.active {
+    background-color: #343a40;
+    border-left: 4px solid #00bcd4; /* Change the color to your preferred accent color */
+}
+
+.sidebar .dropdown-menu {
+    background-color: #343a40;
+}
+
+.sidebar .dropdown-item {
+    color: #ffffff;
+}
+
+.sidebar .dropdown-item:hover,
+.sidebar .dropdown-item:focus,
+.sidebar .dropdown-item.active {
+    background-color: #495057;
+    color: #ffffff;
+}
+
+
+
+/* SideBar.css */
+/* .sidebar-container {
+    position: relative;
+    width: 100%;;
+} */
+
+/* .sidebar {
+    position: fixed;
+    width: 200px;
+    height: 100%; 
+    padding-top: 0px;
+    background: #3E424B;
+    border-left: 10px solid #3E424B;
+    transition: 0.5s;
+    overflow: hidden;
+    
+} */
+
+/* .sidebar.active {
+    width: 100px;
+  }
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    position: absolute;
+    cursor: pointer;
+    left: 0;
+    width: 100%;
+} */
+
+/* .sidebar ul li {
+    position: relative;
+    width: 100%;
+    list-style: none;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.sidebar ul li:hover,
+.sidebar ul li.hovered {
+    background-color: var(--white);
+} */
+
+
+
+/* .sidebar ul li a {
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: var(--black);
+}
+.sidebar ul li:hover a,
+.sidebar ul li.hovered a {
+    color: var(--blue);
+}
+  
+.sidebar ul li a .icon {
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height: 75px;
+    text-align: center;
+}
+.sidebar ul li a .icon ion-icon {
+    font-size: 1.75rem;
+}
+  
+.sidebar ul li a .title {
+    position: relative;
+    display: block;
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    text-align: start;
+    white-space: nowrap;
+} */
+  
+
+/* --------- curve outside ---------- */
+/* .sidebar ul li:hover a::before,
+.sidebar ul li.hovered a::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -50px;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 35px 35px 0 10px var(--white);
+  pointer-events: none;
+}
+.sidebar ul li:hover a Link::after,
+.sidebar ul li.hovered a Link::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -50px;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 35px -35px 0 10px var(--white);
+  pointer-events: none;
+} */
+
+.sub-menu{
+    background-color: #999;
+   
+}
+.sub-menus{
+    
+    margin: 20px;
+}
+
+.dropdown-menu {
+    display: none; /* Hide the dropdown menu by default */
+    position: absolute; /* Position the dropdown menu absolutely */
+    background-color: #fff; /* Background color for the dropdown menu */
+    border: 1px solid #ccc; /* Add a border around the dropdown menu */
+    padding: 10px; /* Add some padding to the dropdown menu */
+    top: 100%; /* Position the submenu below the parent menu item */
+    left: 0; /* Position the submenu flush with the left edge of the parent menu item */
+}
+  
+.dropdown:hover .dropdown-menu {
+    display: block; /* Show the dropdown menu when the parent is hovered */
+}
+  
+
+.main {
+    position: absolute;
+    left: 300px;
+    transition: 0.5s;
+    flex: 1; /* The content takes remaining space */
+    /*background-color: lightblue;  Sample color */
+    padding-left: 100px; /* Adjust to match sidebar width */
+    padding-top: 30px;
+}
+
+.details {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 30px;
+    /* margin-top: 10px; */
+}
+.content .recentOrders {
+    position: relative;
+    display: grid;
+    background: var(--white);
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+}
+
+.recentOrders{
+    padding-top: 50px;
+    margin-bottom: 20px;
+}
+
+.content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+.content table thead td {
+    font-weight: 600;
+}
+.content .recentOrders table tr {
+    color: var(--black1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.content .recentOrders table tr:last-child {
+    border-bottom: none;
+}
+.content .recentOrders table tbody tr:hover {
+    background: rgb(247, 247, 247);
+    
+}
+.content .recentOrders table tr td {
+    padding: 20px;
+}
+
+.btn{
+    margin: 3px;
+}
+.edit {
+    padding: 2px 4px;
+    background: #8de02c;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.delete {
+    padding: 2px 4px;
+    background: #f00;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.edit:hover{
+    background-color: green;
+}
+.delete:hover{
+    background-color: rgb(133, 1, 1);
+}
+
+
+
+.form-group {
+    margin-bottom: 10px;
+}
+  
+label {
+    font-weight: bold;
+}
+  
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    box-sizing: border-box;
+}
+  
+select {
+    appearance: none;
+}
+  
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 2px;
+    background-color: #4caf50;
+    color: white;
+    cursor: pointer;
+}
+  
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+  
+.error {
+    color: #ff0000;
+    font-size: 0.6rem;
+}
+
+.project-card {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+  }
+  
+  .project-card .form-control {
+    background-color: #e9ecef;
+    border: none;
+  }
+  
+  .project-card label {
+    color: #212529;
+  }
+  
+  .project-card button {
+    background-color: #007bff;
+    border: none;
+  }
+  
+  .project-card button:hover {
+    background-color: #0056b3;
+  }
+
+  .project-list-card {
+    border-radius: 15px;
+  }
+  
+  .search-area {
+    margin-bottom: 20px;
+  }
+  
+  .project-item {
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .project-link {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  .project-actions {
+    margin-top: 10px;
+  }
+  
+  .project-actions button {
+    margin-right: 10px;
+  }
+  
+  .row-clickable:hover {
+    cursor: pointer;
+    background-color: #f8f9fa;
+  }
+  
