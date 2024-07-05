@@ -48,7 +48,7 @@ const CreateMessage = () => {
         const inputLength = inputValue.length;
 
         return inputLength === 0 ? [] : users.filter(user =>
-            user.email.toLowerCase().slice(0, inputLength) === inputValue
+            user.first_name.toLowerCase().slice(0, inputLength) === inputValue
         );
     };
 
