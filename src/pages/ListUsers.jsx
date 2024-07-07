@@ -112,6 +112,12 @@ const ListUsers = () => {
               </form>
               {users !== null && (
                 <div>
+                  <button
+                    onClick={() => navigate('/admin/*/create-user')}
+                    className='btn btn-primary mt-3'
+                  >
+                    Add User +
+                  </button>
                   <table className='table table-hover'>
                     <thead className='table-dark'>
                       <tr>
@@ -157,12 +163,7 @@ const ListUsers = () => {
                       ))}
                     </tbody>
                   </table>
-                  <button
-                    onClick={() => navigate('/admin/*/create-user')}
-                    className='btn btn-primary mt-3'
-                  >
-                    Add User +
-                  </button>
+                  
                 </div>
               )}
             </div>

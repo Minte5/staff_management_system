@@ -55,8 +55,15 @@ const ProjectDetails = () => {
                             <p><strong>Start Date:</strong> {project.expected_start_date}</p>
                             <p><strong>End Date:</strong> {project.expected_end_date}</p>
                             <p><strong>Description:</strong> {project.description}</p>
+
                             
-                            <button className="btn btn-primary mt-3" onClick={() => navigate(`/edit-project/${id}`)}>Edit Project</button>
+                            <button
+                                onClick={() => navigate(`/admin/*/create-task/${project.id}`)}
+                                className='btn btn-primary mt-3'
+                            >
+                                Add Task +
+                            </button>
+                            
                         </div>
                     </div>
                 </div>

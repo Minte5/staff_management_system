@@ -10,7 +10,7 @@ const CreateUsers = () => {
     last_name: "",
     email: "",
     phone: "",
-    roles: [{ office: "", role: "", work_role: "" }],
+    roles: [{ office: "", role: "",section: "", work_role: "" }],
     gender: "",
     is_active: false,
   });
@@ -76,7 +76,7 @@ const CreateUsers = () => {
         last_name: "",
         email: "",
         phone: "",
-        roles: [{ office: "", role: "", work_role: "" }],
+        roles: [{ office: "", role: "",section: "", work_role: "" }],
         gender: "",
         is_active: false,
       });
@@ -165,6 +165,7 @@ const CreateUsers = () => {
                   />
                   <label htmlFor="phone">Phone</label>
                 </div>
+
                 <div className="row mb-3">
                   <div className="col">
                     <div className="form-floating">
@@ -202,6 +203,23 @@ const CreateUsers = () => {
                       <label htmlFor="role">Role</label>
                     </div>
                   </div>
+                </div>
+                <div className="mb-3 form-floating">
+                  <select
+                    className="form-control"
+                    id="section"
+                    name="section"
+                    value={formData.roles[0].section}
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="">Select Office</option>
+                    <option value="CSE">Computer Science and Engineering</option>
+                    <option value="CE">Computer Engineering</option>
+                    <option value="IT">Information Technology</option>
+                    
+                  </select>
+                  <label htmlFor="office">Section</label>
                 </div>
                 <div className="row mb-3">
                   <div className="col">
