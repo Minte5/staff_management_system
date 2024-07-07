@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules/
-node_modules/
+./node_modules
 /node_modules
 */node_modules/*
 /.pnp
@@ -27,3 +27,7 @@ yarn-error.log*
 .gitignore
 node_modules/.cache/default-development/3.pack
 node_modules/.cache/default-development/8.pack
+node_modules
+node_modules
+node_modules
+node_modules
