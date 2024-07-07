@@ -30,23 +30,7 @@ const ListEvents = () => {
         fetchEvents();
     }, []);
 
-    const handleSearchChange = async (e) => {
-        setSearchQuery(e.target.value);
-        try {
-            const storedTokenString = localStorage.getItem('token');
-            const token = JSON.parse(storedTokenString);
-
-            const response = await axios.get(`http://0.0.0.0:8888/events?search=${e.target.value}`, {
-                headers: {
-                    Authorization: `Token ${token.key}`
-                }
-            });
-            setEvents(response.data);
-        } catch (error) {
-            console.error('Error searching events:', error);
-            setError('Error searching events');
-        }
-    };
+    
 
     const filteredEvents = events.filter(event =>
         event.subject.toLowerCase().includes(searchQuery.toLowerCase())
@@ -65,16 +49,7 @@ const ListEvents = () => {
                     <div className="card event-list-card shadow">
                         <div className="card-body">
                             <h1 className="mb-4">Event List</h1>
-                            <div className="search-area mb-4">
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Search events by name..."
-                                    value={searchQuery}
-                                    onChange={handleSearchChange}
-                                />
-                                {error && <p className="text-danger">{error}</p>}
-                            </div>
+                            
                             
                             <table className="table">
                                 <thead>

@@ -42,7 +42,7 @@ const Login = ({ onLogin }) => {
             navigate('/coord/*/users');
           }
           else if(roles[0].role === 'Staff'){
-            navigate('/ugcoord');
+            navigate('/staff/*/list-projects');
           }
          
           else {
@@ -50,12 +50,12 @@ const Login = ({ onLogin }) => {
           }
           
         } 
-        else if (roles[0].office === 'UG') {
+        else if (roles[0].office === 'Under Graduate') {
           if(roles[0].role === 'Head'){
             navigate('/pgstaff');
           }
           else if(roles[0].role === 'Staff'){
-            navigate('/ugstaff');
+            navigate('/staff/*/list-projects');
           }
           
           else {
