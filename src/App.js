@@ -15,6 +15,7 @@ import Profile from './Profile';
 
 import UserPage2 from './pages/UserPage2';
 import UserPage1 from './pages/UserPage1';
+import ListProjects from './pages/ListProjects';
 
 import ForgotPassword from './pages/ForgotPassword';
 import ForgotPasswordConfirm from './pages/ForgotPasswordConfirm';
@@ -64,6 +65,8 @@ const AppContent = () => {
         <Route path="/user2" element={<UserPage2 />} />
 
         <Route path="/profile" element={<Profile />} />
+        <Route path="/projects" element={<ListProjects />} />
+        <Route path="/project-details/:id" element={<ListProjects />} />
       </Routes>
     </div>
   );

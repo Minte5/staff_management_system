@@ -36,7 +36,7 @@ const ListProjects = () => {
             const storedTokenString = localStorage.getItem('token');
             const token = JSON.parse(storedTokenString);
 
-            const response = await axios.get(`http://0.0.0.0:8888/project/${id}`, {
+            const response = await axios.get(`http://0.0.0.0:8888/project/${id}/`, {
                 headers: {
                     Authorization: `Token ${token.key}`
                 }
@@ -57,7 +57,7 @@ const ListProjects = () => {
             const storedTokenString = localStorage.getItem('token');
             const token = JSON.parse(storedTokenString);
 
-            const response = await axios.get(`http://0.0.0.0:8888/edit/${projectId}`, {
+            const response = await axios.put(`http://0.0.0.0:8888/project/${projectId}/`, {
                 headers: {
                     Authorization: `Token ${token.key}`
                 }
@@ -78,7 +78,7 @@ const ListProjects = () => {
             const storedTokenString = localStorage.getItem('token');
             const token = JSON.parse(storedTokenString);
 
-            await axios.delete(`http://0.0.0.0:8888/project/${projectId}`, {
+            await axios.delete(`http://0.0.0.0:8888/project/${projectId}/`, {
                 headers: {
                     Authorization: `Token ${token.key}`
                 }

@@ -34,7 +34,7 @@ const ListUsers = () => {
       const storedTokenString = localStorage.getItem('token');
       const token = JSON.parse(storedTokenString);
       // Send a request to your backend to delete the user
-      await axios.delete(`http://0.0.0.0:8888/users/${userId}`, {
+      await axios.delete(`http://0.0.0.0:8888/users/${userId}/`, {
         headers: {
           Authorization: `Token ${token.key}` 
         }
