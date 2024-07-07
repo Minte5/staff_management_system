@@ -6,13 +6,21 @@ import ListUsers from './ListUsers';
 import CreateUsers from './CreateUsers';
 import CreateProject from './CreateProject';
 import ListProjects from './ListProjects';
+import EventScheduler from './EventScheduler';
 import Profile from './Profile';
+import ProjectDetails from './ProjectDetails';
+import ListEvents from './ListEvents';
+import ListMessages from './ListMessages';
+import CreateMessage from './CreateMessage';
+import ListSections from './ListSections';
+import CreateSection from './CreateSection';
 
 import React, { useState, useEffect } from 'react';
 import './AdminPage.css';
 import axios from 'axios';
 
 import withAuth from './withAuth'; // Import the withAuth HOC
+
 
 const AdminDashboard = () => {
   const [tokenExists, setTokenExists] = useState(true);
@@ -55,7 +63,15 @@ const AdminDashboard = () => {
                     <Route path="*/create-user" element={<CreateUsers />} />
                     <Route path="*/create-project" element={<CreateProject />} />
                     <Route path="*/list-projects" element={<ListProjects />} />
+                    <Route path="*/list-events" element={<ListEvents />} />
+                    <Route path="*/event-scheduler" element={<EventScheduler />} />
                     <Route path="*/profile" element={<Profile />} />
+                    <Route path="*/project-details/:id" element={<ProjectDetails />} />
+                    
+                    <Route path="*/list-messages" element={<ListMessages />} />
+                    <Route path="*/create-message" element={<CreateMessage />} />
+                    <Route path="*/list-sections" element={<ListSections />} />
+                    <Route path="*/create-section" element={<CreateSection />} />
                 </Routes>
             </div>
         </div>

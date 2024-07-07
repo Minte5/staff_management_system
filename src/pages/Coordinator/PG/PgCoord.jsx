@@ -1,27 +1,76 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
-import SideBar from '../SideBar';
-import '../../AdminPage.css';
+
+import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
+
+import SideBar from './SideBar';
+import ListUsers from './ListUsers';
+import ListProjects from './ListProjects';
+
+import Profile from './Profile';
+
+import ListEvents from './ListEvents';
+import ListMessages from './ListMessages';
+
+
+import React, { useState, useEffect } from 'react';
+import './AdminPage.css';
+import axios from 'axios';
+
+import withAuth from './withAuth'; // Import the withAuth HOC
+
 
 const PgCoord = () => {
-  const token = localStorage.getItem('token');
-  
-  // Check if token is null and redirect to login page if it is
-  if (!token) {
-    return <Navigate to="/" />; // Return null to prevent rendering the  component
-  }
+  const [tokenExists, setTokenExists] = useState(true);
+  useEffect(() => {
+    const storedTokenString = localStorage.getItem('token');
+    if (!storedTokenString) {
+      setTokenExists(false);
+      return;
+    }
+
+    const token = JSON.parse(storedTokenString);
+    console.log('Stored Token:', token);
+
+    // Check if token has expired
+    const currentTime = Date.now() / 1000; // Convert milliseconds to seconds
+    if (token.expires && token.expires < currentTime) {
+      // Token has expired, clear it from local storage and redirect to login page
+      localStorage.removeItem('token');
+      setTokenExists(false);
+      return;
+    }
+
+    // Token is valid, don't fetch users initially
+  }, []);
+
+
+
+
+
 
   return (
-    
-    <div>
-      <SideBar />
-      <div>
-        <h2>TaCoord Panel</h2>
-        <p>Welcome to the Staff. You have access to Staff features.</p>
-      </div>
-      
+    <div className="container-fluid">
+        <div className="row">
+            <div className="col-2 p-0">
+                <SideBar />
+            </div>
+            <div className="col-10 content p-1">
+                <Routes>
+                    
+                    
+                    <Route path="*/users" element={<ListUsers />} />
+                    <Route path="*/list-projects" element={<ListProjects />} />
+                    <Route path="*/list-events" element={<ListEvents />} />
+                    
+                    <Route path="*/profile" element={<Profile />} />
+                    
+                    <Route path="*/list-messages" element={<ListMessages />} />
+                    
+                </Routes>
+            </div>
+        </div>
     </div>
-  );
+);
 };
 
-export default PgCoord;
+
+export default withAuth(PgCoord); 
