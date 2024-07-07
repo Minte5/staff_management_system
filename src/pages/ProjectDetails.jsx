@@ -15,7 +15,7 @@ const ProjectDetails = () => {
                 const token = JSON.parse(storedTokenString);
 
                 console.log('Error fetching project details:', id);
-                const response = await axios.get(`http://0.0.0.0:8888/project/${id}`, {
+                const response = await axios.get(`http://0.0.0.0:8888/project/${id}/`, {
                     withCredentials: true,
                     headers: {
                         'Content-Type':'application/json',
