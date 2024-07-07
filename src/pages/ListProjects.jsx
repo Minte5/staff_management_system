@@ -41,11 +41,7 @@ const ListProjects = () => {
             const storedTokenString = localStorage.getItem('token');
             const token = JSON.parse(storedTokenString);
 
-<<<<<<< HEAD
-            const response = await axios.get(`http://0.0.0.0:8888/project/${id}/`, {
-=======
-            const response = await axios.get(`http://0.0.0.0:8888/project/${searchQuery}`, {
->>>>>>> 3c9a69e514f92d8b5f07d926caa417f4b0f7af4c
+            const response = await axios.get(`http://0.0.0.0:8888/project/${searchQuery}/`, {
                 headers: {
                     Authorization: `Token ${token.key}`
                 }
@@ -86,13 +82,8 @@ const ListProjects = () => {
         try {
             const storedTokenString = localStorage.getItem('token');
             const token = JSON.parse(storedTokenString);
-<<<<<<< HEAD
-
-            const response = await axios.put(`http://0.0.0.0:8888/project/${projectId}/`, {
-=======
             // Send a request to your backend to update the project data
             await axios.patch(`http://0.0.0.0:8888/project/${updatedProject.id}/`, updatedProject, {
->>>>>>> 3c9a69e514f92d8b5f07d926caa417f4b0f7af4c
                 headers: {
                     Authorization: `Token ${token.key}`
                 }
