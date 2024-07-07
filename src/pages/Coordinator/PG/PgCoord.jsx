@@ -3,12 +3,21 @@ import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-ro
 
 import SideBar from './SideBar';
 import ListUsers from './ListUsers';
+import CreateProject from './CreateProject';
+import ProjectDetails from './ProjectDetails';
+import CreateTask from './CreateTask';
+import CreateMessage from './CreateMessage';
+import EventDetails from './EventDetails';
+
 import ListProjects from './ListProjects';
 
 import Profile from './Profile';
 
 import ListEvents from './ListEvents';
 import ListMessages from './ListMessages';
+
+import EventScheduler from './EventScheduler';
+
 
 
 import React, { useState, useEffect } from 'react';
@@ -58,10 +67,15 @@ const PgCoord = () => {
                     
                     
                     <Route path="*/users" element={<ListUsers />} />
+                    <Route path="*/create-project" element={<CreateProject />} />
                     <Route path="*/list-projects" element={<ListProjects />} />
+                    <Route path="*/project-details/:id" element={<ProjectDetails />} />
                     <Route path="*/list-events" element={<ListEvents />} />
-                    
+                    <Route path="*/create-task/:projectId" element={<CreateTask />} />
                     <Route path="*/profile" element={<Profile />} />
+                    <Route path="*/event-scheduler" element={<EventScheduler />} />
+                    <Route path="*/create-message" element={<CreateMessage />} />
+                    <Route path="*/EventDetails/:id" element={<EventDetails />} />
                     
                     <Route path="*/list-messages" element={<ListMessages />} />
                     

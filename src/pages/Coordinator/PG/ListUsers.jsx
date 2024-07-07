@@ -123,7 +123,7 @@ const ListUsers = () => {
                         <th>Role</th>
                         <th>Phone</th>
                         <th>Email</th>
-                        <th>Operation</th>
+                        
                       </tr>
                     </thead>
                     <tbody>
@@ -141,29 +141,14 @@ const ListUsers = () => {
                           <td>{user.phone}</td>
                           <td>{user.email}</td>
                           <td className='d-flex'>
-                            <button
-                              onClick={() => handleEditClick(user)}
-                              className='btn btn-outline-success btn-sm me-2'
-                            >
-                              Edit
-                            </button>
-                            <button
-                              onClick={() => deleteUser(user.id)}
-                              className='btn btn-outline-danger btn-sm'
-                            >
-                              Delete
-                            </button>
+                            
+                            
                           </td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
-                  <button
-                    onClick={() => navigate('/admin/*/create-user')}
-                    className='btn btn-primary mt-3'
-                  >
-                    Add User +
-                  </button>
+                  
                 </div>
               )}
             </div>

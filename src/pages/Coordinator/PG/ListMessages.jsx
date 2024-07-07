@@ -77,7 +77,7 @@ const ListMessages = () => {
                   {error && <p className="text-danger">{error}</p>}
                   <div className="text-left mb-3">
                     <button
-                      onClick={() => navigate('/admin/*/create-message')}
+                      onClick={() => navigate('/coord/*/create-message')}
                       className='btn btn-primary mt-3'
                     >
                       Add Message +
@@ -92,7 +92,7 @@ const ListMessages = () => {
                         <div className="actions">
                           <button className="btn btn-primary mr-2" onClick={() => handleEdit(message.id)}>Edit</button>
                           <button className="btn btn-danger mr-2" onClick={() => handleDelete(message.id)}>Delete</button>
-                          <button className="btn btn-secondary" onClick={() => navigate(`/admin/*/message-details/${message.id}`)}>View Details</button>
+                          <button className="btn btn-secondary" onClick={() => navigate(`/coord/*/message-details/${message.id}`)}>View Details</button>
                         </div>
                       </div>
                     ))}

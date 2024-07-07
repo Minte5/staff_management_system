@@ -37,9 +37,9 @@ const Login = ({ onLogin }) => {
         if (roles[0].office === 'HOD' || roles[0].office === 'DEVELOPER') {
           navigate('/admin/*/users');
         } 
-        else if (roles[0].office === 'PG') {
+        else if (roles[0].office === 'Post Graduate') {
           if(roles[0].role === 'Coordinator'){
-            navigate('/pgcoord/*');
+            navigate('/coord/*/users');
           }
           else if(roles[0].role === 'Staff'){
             navigate('/ugcoord');

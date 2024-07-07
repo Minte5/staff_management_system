@@ -140,13 +140,13 @@ const ListEvents = () => {
                                 <tbody>
                                     {filteredEvents.map(event => (
                                         <tr key={event.id} className="row-clickable" onClick={() => (event.id)}>
-                                            <td><Link to={`/admin/*/event-details/${event.id}`}>{event.subject}</Link></td>
+                                            <td><Link to={`/admin/*/EventDetails/${event.id}`}>{event.subject}</Link></td>
                                             <td>{event.schedule_time}</td>
                                             <td>{event.link}</td>
                                             <td>
                                                 <button className="btn btn-primary" onClick={() => handleEdit(event.id)}>Edit</button>
                                                 <button className="btn btn-danger" onClick={() => handleDelete(event.id)}>Delete</button>
-                                                <button className="btn btn-secondary" onClick={() => navigate(`/admin/*/event-details/${event.id}`)}>View Details</button>
+                                                <button className="btn btn-secondary" onClick={() => navigate(`/admin/*/EventDetails/${event.id}`)}>View Details</button>
                                             </td>
                                         </tr>
                                     ))}

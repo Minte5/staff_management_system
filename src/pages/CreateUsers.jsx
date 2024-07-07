@@ -20,7 +20,7 @@ const CreateUsers = () => {
   const handleChange = (e) => {
     const { type, name, value, checked } = e.target;
     setFormData((prevFormData) => {
-      if (name === "office" || name === "role" || name === "work_role") {
+      if (name === "office" || name === "section" || name === "role" || name === "work_role") {
         const updatedRoles = [...prevFormData.roles];
         updatedRoles[0] = { ...updatedRoles[0], [name]: value };
         return { ...prevFormData, roles: updatedRoles };
@@ -211,15 +211,15 @@ const CreateUsers = () => {
                     name="section"
                     value={formData.roles[0].section}
                     onChange={handleChange}
-                    required
+                    
                   >
-                    <option value="">Select Office</option>
-                    <option value="CSE">Computer Science and Engineering</option>
-                    <option value="CE">Computer Engineering</option>
-                    <option value="IT">Information Technology</option>
+                    <option value="">Select Section</option>
+                    <option value="Computer Science and Engineering">Computer Science and Engineering</option>
+                    <option value="Computer Engineering">Computer Engineering</option>
+                    <option value="Information Technology">Information Technology</option>
                     
                   </select>
-                  <label htmlFor="office">Section</label>
+                  <label htmlFor="section">Section</label>
                 </div>
                 <div className="row mb-3">
                   <div className="col">

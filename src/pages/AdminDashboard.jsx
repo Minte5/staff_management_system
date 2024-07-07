@@ -15,6 +15,7 @@ import CreateMessage from './CreateMessage';
 import ListSections from './ListSections';
 import CreateSection from './CreateSection';
 import CreateTask from './CreateTask';
+import EventDetails from './EventDetails';
 
 import React, { useState, useEffect } from 'react';
 import './AdminPage.css';
@@ -73,6 +74,7 @@ const AdminDashboard = () => {
                     <Route path="*/create-message" element={<CreateMessage />} />
                     <Route path="*/list-sections" element={<ListSections />} />
                     <Route path="*/create-section" element={<CreateSection />} />
+                    <Route path="*/EventDetails/:id" element={<EventDetails />} />
                 </Routes>
             </div>
         </div>
