@@ -77,7 +77,7 @@ const ListEvents = () => {
             const storedTokenString = localStorage.getItem('token');
             const token = JSON.parse(storedTokenString);
 
-            await axios.patch(`http://0.0.0.0:8888/events/${selectedEvent.id}/`, selectedEvent, {
+            await axios.patch(`http://0.0.0.0:8888/event_schedule/${selectedEvent.id}/`, selectedEvent, {
                 headers: {
                     Authorization: `Token ${token.key}`
                 }
@@ -97,7 +97,7 @@ const ListEvents = () => {
             const storedTokenString = localStorage.getItem('token');
             const token = JSON.parse(storedTokenString);
 
-            await axios.delete(`http://0.0.0.0:8888/events/${eventId}`, {
+            await axios.delete(`http://0.0.0.0:8888/event_schedule/${eventId}`, {
                 headers: {
                     Authorization: `Token ${token.key}`
                 }

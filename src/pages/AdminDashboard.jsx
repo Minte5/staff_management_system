@@ -16,6 +16,7 @@ import ListSections from './ListSections';
 import CreateSection from './CreateSection';
 import CreateTask from './CreateTask';
 import EventDetails from './EventDetails';
+import EventScheduleInvitation from './EventScheduleInvitation';
 
 import React, { useState, useEffect } from 'react';
 import './AdminPage.css';
@@ -75,6 +76,7 @@ const AdminDashboard = () => {
                     <Route path="*/list-sections" element={<ListSections />} />
                     <Route path="*/create-section" element={<CreateSection />} />
                     <Route path="*/EventDetails/:id" element={<EventDetails />} />
+                    <Route path="*/event-schedule-invitation" element={<EventScheduleInvitation />} />
                 </Routes>
             </div>
         </div>

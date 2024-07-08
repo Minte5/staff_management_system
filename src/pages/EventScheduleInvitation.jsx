@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Autosuggest from 'react-autosuggest';
 
-const CreateMessage = () => {
+const EventScheduleInvitation = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const eventSchedulePk = location.state?.eventSchedulePk;
+
+    useEffect(() => {
+        if (!eventSchedulePk) {
+            
+            navigate('/'); 
+        }
+    }, [eventSchedulePk, navigate]);
+
     const [formData, setFormData] = useState({
         recipient: '',
-        recipientId: '', // Store the recipient's ID
-        message: '',
-        attachment: null
+        recipientId: '' 
     });
 
     const [suggestions, setSuggestions] = useState([]);
@@ -39,11 +49,6 @@ const CreateMessage = () => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        setFormData({ ...formData, attachment: file });
-    };
-
     const getSuggestions = (value) => {
         const inputValue = value.trim().toLowerCase();
         const inputLength = inputValue.length;
@@ -67,7 +72,7 @@ const CreateMessage = () => {
             recipient: `${suggestion.first_name} ${suggestion.last_name}`, 
             recipientId: suggestion.id 
         });
-        console.log(`Selected recipient ID: ${suggestion.id}`); // Debugging log
+        console.log(`Selected recipient ID: ${suggestion.id}`); 
     };
 
     const getSuggestionValue = (suggestion) => `${suggestion.first_name} ${suggestion.last_name}`;
@@ -88,36 +93,35 @@ const CreateMessage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(`Recipient ID on submit: ${formData.recipientId}`); 
+        console.log(`Event Schedule PK: ${eventSchedulePk}`); 
         try {
             const formDataToSend = new FormData();
             formDataToSend.append('recipient', formData.recipientId); 
-            formDataToSend.append('message', formData.message);
-            if (formData.attachment) {
-                formDataToSend.append('attachment', formData.attachment);
-            }
 
             const storedTokenString = localStorage.getItem('token');
             const token = JSON.parse(storedTokenString);
-            
-            const response = await axios.post(`http://0.0.0.0:8888/msg/send/?receiver=${formData.recipientId}/`, formDataToSend, {
+
+            const response = await axios.post(`http://0.0.0.0:8888/event_schedule/${eventSchedulePk}/invitation/`, formDataToSend, {
                 headers: {
                     Authorization: `Token ${token.key}`,
-                    'Content-Type': 'multipart/form-data'
+                    //'Content-Type': 'multipart/form-data'
                 }
             });
 
-            console.log('Message sent successfully:', response.data);
+            console.log('Invitation sent successfully:', response.data);
 
             setFormData({
                 recipient: '',
-                recipientId: '',
-                message: '',
-                attachment: null
+                recipientId: ''
             });
         } catch (error) {
-            console.error('Error sending email:', error);
+            console.error('Error sending invitation:', error);
         }
     };
+
+    if (!eventSchedulePk) {
+        return <p>Loading...</p>; // Show a loading message or redirect
+    }
 
     return (
         <div className="container mt-5">
@@ -125,7 +129,7 @@ const CreateMessage = () => {
                 <div className="col-md-8">
                     <div className="card shadow">
                         <div className="card-body">
-                            <h1 className="mb-4">Compose Message</h1>
+                            <h1 className="mb-4">Send Event Invitation</h1>
                             <form onSubmit={handleSubmit}>
                                 <div className="form-group">
                                     <Autosuggest
@@ -138,29 +142,7 @@ const CreateMessage = () => {
                                         onSuggestionSelected={onSuggestionSelected}
                                     />
                                 </div>
-                                <div className="form-group">
-                                    <label htmlFor="message">Message</label>
-                                    <textarea
-                                        className="form-control"
-                                        id="message"
-                                        name="message"
-                                        rows="5"
-                                        value={formData.message}
-                                        onChange={handleChange}
-                                        required
-                                    ></textarea>
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="attachment">Attachment</label>
-                                    <input
-                                        type="file"
-                                        className="form-control-file"
-                                        id="attachment"
-                                        name="attachment"
-                                        onChange={handleFileChange}
-                                    />
-                                </div>
-                                <button type="submit" className="btn btn-primary mt-3">Send Message</button>
+                                <button type="submit" className="btn btn-primary mt-3">Send Invitation</button>
                             </form>
                         </div>
                     </div>
@@ -170,4 +152,4 @@ const CreateMessage = () => {
     );
 };
 
-export default CreateMessage;
+export default EventScheduleInvitation;

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './AdminPage.css';
-import { useNavigate, Link  } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const ListUsers = () => {
   const [users, setUsers] = useState(null);
-  const [selectedUser, setSelectedUser] = useState(null); 
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [originalUser, setOriginalUser] = useState(null); // Add this state
   const [id, setSearchId] = useState('');
   const navigate = useNavigate();
 
@@ -17,7 +18,7 @@ const ListUsers = () => {
 
         const response = await axios.get('http://0.0.0.0:8888/users/', {
           headers: {
-            Authorization: `Token ${token.key}` 
+            Authorization: `Token ${token.key}`
           }
         });
         setUsers(response.data);
@@ -26,7 +27,7 @@ const ListUsers = () => {
       }
     };
 
-    fetchUsers(); 
+    fetchUsers();
   }, []);
 
   const deleteUser = async (userId) => {
@@ -35,7 +36,7 @@ const ListUsers = () => {
       const token = JSON.parse(storedTokenString);
       await axios.delete(`http://0.0.0.0:8888/users/${userId}/`, {
         headers: {
-          Authorization: `Token ${token.key}` 
+          Authorization: `Token ${token.key}`
         }
       });
       setUsers(users.filter(user => user.id !== userId));
@@ -43,28 +44,40 @@ const ListUsers = () => {
       console.error('Error deleting user:', error);
     }
   };
-  
+
   const handleEditClick = (user) => {
-    setSelectedUser(user); 
+    setOriginalUser(user); // Store the original user data
+    setSelectedUser({ ...user }); // Create a copy for editing
   };
-  
+
   const handleEditSubmit = async (updatedUser) => {
     try {
       const storedTokenString = localStorage.getItem('token');
       const token = JSON.parse(storedTokenString);
-      
-      await axios.patch(`http://0.0.0.0:8888/users/${updatedUser.id}/`, updatedUser, {
-        headers: {
-          Authorization: `Token ${token.key}` 
+  
+      const modifiedFields = {};
+      Object.keys(updatedUser).forEach((key) => {
+        if (updatedUser[key] !== originalUser[key]) {
+          modifiedFields[key] = updatedUser[key];
         }
       });
-      
+  
+      console.log('Modified Fields:', modifiedFields); // Log modified fields for debugging
+  
+      await axios.patch(`http://0.0.0.0:8888/users/${updatedUser.id}/`, modifiedFields, {
+        headers: {
+          Authorization: `Token ${token.key}`
+        }
+      });
+  
       setUsers(users.map(user => (user.id === updatedUser.id ? updatedUser : user)));
-      setSelectedUser(null); 
+      setSelectedUser(null);
+      setOriginalUser(null); // Reset original user after submitting edits
     } catch (error) {
       console.error('Error updating user:', error);
     }
   };
+  
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -74,13 +87,13 @@ const ListUsers = () => {
 
       const response = await axios.get(`http://0.0.0.0:8888/users/${id}`, {
         headers: {
-          Authorization: `Token ${token.key}` 
+          Authorization: `Token ${token.key}`
         }
       });
-      setUsers(response.data ? [response.data] : []); 
+      setUsers(response.data ? [response.data] : []);
     } catch (error) {
       console.error('Error searching user:', error);
-      setUsers([]); 
+      setUsers([]);
     }
   };
 

@@ -36,7 +36,7 @@ const CreateUsers = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate form data
+    
     const validationErrors = {};
 
     if (!formData.username.trim()) {
