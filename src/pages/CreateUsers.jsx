@@ -10,17 +10,30 @@ const CreateUsers = () => {
     last_name: "",
     email: "",
     phone: "",
-    roles: [{ office: "", role: "",section: "", work_role: "" }],
+    roles: [{ office: "", role: "", section: "", work_role: "" }],
     gender: "",
     is_active: false,
   });
   const [errors, setErrors] = useState({});
+  const [roleOptions, setRoleOptions] = useState([]);
   const navigate = useNavigate();
+
+  const officeRoleMapping = {
+    'Under Graduate': ['Head', 'Staff'],
+    'Post Graduate': ['Coordinator', 'Staff'],
+    'Technical Assistance': ['Coordinator', 'Staff'],
+    'Developer': ['Administrator', 'Staff']
+  };
 
   const handleChange = (e) => {
     const { type, name, value, checked } = e.target;
     setFormData((prevFormData) => {
-      if (name === "office" || name === "section" || name === "role" || name === "work_role") {
+      if (name === 'office') {
+        const updatedRoles = [...prevFormData.roles];
+        updatedRoles[0] = { ...updatedRoles[0], [name]: value, role: '' };
+        setRoleOptions(officeRoleMapping[value] || []);
+        return { ...prevFormData, roles: updatedRoles };
+      } else if (name === "section" || name === "role" || name === "work_role") {
         const updatedRoles = [...prevFormData.roles];
         updatedRoles[0] = { ...updatedRoles[0], [name]: value };
         return { ...prevFormData, roles: updatedRoles };
@@ -35,8 +48,6 @@ const CreateUsers = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    
     const validationErrors = {};
 
     if (!formData.username.trim()) {
@@ -76,7 +87,7 @@ const CreateUsers = () => {
         last_name: "",
         email: "",
         phone: "",
-        roles: [{ office: "", role: "",section: "", work_role: "" }],
+        roles: [{ office: "", role: "", section: "", work_role: "" }],
         gender: "",
         is_active: false,
       });
@@ -193,12 +204,12 @@ const CreateUsers = () => {
                         name="role"
                         value={formData.roles[0].role}
                         onChange={handleChange}
+                        disabled={!formData.roles[0].office} // Disable role select if office is not selected
                       >
                         <option value="">Select</option>
-                        <option value="Staff">Staff</option>
-                        <option value="Coordinator">Coordinator</option>
-                        <option value="Head">Head</option>
-                        <option value="Administrator">Administrator</option>
+                        {roleOptions.map((role, index) => (
+                          <option key={index} value={role}>{role}</option>
+                        ))}
                       </select>
                       <label htmlFor="role">Role</label>
                     </div>
@@ -211,13 +222,11 @@ const CreateUsers = () => {
                     name="section"
                     value={formData.roles[0].section}
                     onChange={handleChange}
-                    
                   >
                     <option value="">Select Section</option>
                     <option value="Computer Science and Engineering">Computer Science and Engineering</option>
                     <option value="Computer Engineering">Computer Engineering</option>
                     <option value="Information Technology">Information Technology</option>
-                    
                   </select>
                   <label htmlFor="section">Section</label>
                 </div>

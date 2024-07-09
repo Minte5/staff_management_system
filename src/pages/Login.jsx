@@ -50,9 +50,22 @@ const Login = ({ onLogin }) => {
           }
           
         } 
+        else if (roles[0].office === 'Technical Assistance') {
+          if(roles[0].role === 'Coordinator'){
+            navigate('/coord/*/users');
+          }
+          else if(roles[0].role === 'Staff'){
+            navigate('/staff/*/list-projects');
+          }
+         
+          else {
+            setLoginError(true);
+          }
+          
+        } 
         else if (roles[0].office === 'Under Graduate') {
           if(roles[0].role === 'Head'){
-            navigate('/pgstaff');
+            navigate('/admin/*/users');
           }
           else if(roles[0].role === 'Staff'){
             navigate('/staff/*/list-projects');
