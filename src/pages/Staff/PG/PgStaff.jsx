@@ -9,6 +9,7 @@ import Profile from './Profile';
 
 import ListEvents from './ListEvents';
 import ListMessages from './ListMessages';
+import CreateMessage from './CreateMessage';
 
 
 import React, { useState, useEffect } from 'react';
@@ -64,6 +65,7 @@ const PgStaff = () => {
                     <Route path="*/profile" element={<Profile />} />
                     
                     <Route path="*/list-messages" element={<ListMessages />} />
+                    <Route path="*/create-message" element={<CreateMessage />} />
                     
                 </Routes>
             </div>

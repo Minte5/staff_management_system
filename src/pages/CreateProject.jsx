@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './AdminPage.css';
+import {  useNavigate } from 'react-router-dom';
 
 const CreateProject = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ const CreateProject = () => {
     expected_start_date: '',
     expected_end_date: ''
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,13 +29,16 @@ const CreateProject = () => {
         }
       });
       console.log('Project created successfully:', response.data);
-      // Clear form data after successful submission
+      
+      
       setFormData({
         name: '',
         description: '',
         expected_start_date: '',
         expected_end_date: ''
       });
+      window.alert('Task created successfully!');
+      navigate('/admin/*/list-projects');
     } catch (error) {
       console.error('Error creating project:', error);
     }

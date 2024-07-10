@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Autosuggest from 'react-autosuggest';
+import {  useNavigate } from 'react-router-dom';
 
 const CreateMessage = () => {
     const [formData, setFormData] = useState({
         recipient: '',
-        message: '',
+        recipientId: '', 
+        body: '',
         attachment: null
     });
 
     const [suggestions, setSuggestions] = useState([]);
     const [users, setUsers] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchUsers();
@@ -61,7 +64,12 @@ const CreateMessage = () => {
     };
 
     const onSuggestionSelected = (event, { suggestion }) => {
-        setFormData({ ...formData, recipient: `${suggestion.first_name} ${suggestion.last_name}` });
+        setFormData({ 
+            ...formData, 
+            recipient: `${suggestion.first_name} ${suggestion.last_name}`, 
+            recipientId: suggestion.id 
+        });
+        console.log(`Selected recipient ID: ${suggestion.id}`); 
     };
 
     const getSuggestionValue = (suggestion) => `${suggestion.first_name} ${suggestion.last_name}`;
@@ -81,31 +89,40 @@ const CreateMessage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(`Recipient ID on submit: ${formData.recipientId}`); 
         try {
             const formDataToSend = new FormData();
-            formDataToSend.append('recipient', formData.recipient);
-            formDataToSend.append('message', formData.message);
+            formDataToSend.append('recipient', formData.recipientId); 
+            formDataToSend.append('body', formData.body);
             if (formData.attachment) {
                 formDataToSend.append('attachment', formData.attachment);
             }
-
-            const response = await axios.post('http://api.example.com/send-email', formDataToSend, {
+    
+            const storedTokenString = localStorage.getItem('token');
+            const token = JSON.parse(storedTokenString);
+            
+            const response = await axios.post(`http://0.0.0.0:8888/msg/send/?receiver=${formData.recipientId}`, formDataToSend, {
                 headers: {
+                    Authorization: `Token ${token.key}`,
                     'Content-Type': 'multipart/form-data'
                 }
             });
-
+    
             console.log('Message sent successfully:', response.data);
-            
+    
             setFormData({
                 recipient: '',
-                message: '',
+                recipientId: '',
+                body: '',
                 attachment: null
             });
+            window.alert('Message sent successfully!');
+            navigate('/coord/*/list-messages');
         } catch (error) {
             console.error('Error sending email:', error);
         }
     };
+    
 
     return (
         <div className="container mt-5">
@@ -127,13 +144,13 @@ const CreateMessage = () => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="message">Message</label>
+                                    <label htmlFor="body">Message</label>
                                     <textarea
                                         className="form-control"
-                                        id="message"
-                                        name="message"
+                                        id="body"
+                                        name="body"
                                         rows="5"
-                                        value={formData.message}
+                                        value={formData.body}
                                         onChange={handleChange}
                                         required
                                     ></textarea>

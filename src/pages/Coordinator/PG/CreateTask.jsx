@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const CreateTask = () => {
     const { projectId } = useParams();
@@ -8,6 +8,7 @@ const CreateTask = () => {
     const [error, setError] = useState(null);
     const [taskName, setTaskName] = useState('');
     const [taskDescription, setTaskDescription] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProjectDetails = async () => {
@@ -52,7 +53,8 @@ const CreateTask = () => {
                 }
             });
 
-            
+            window.alert('Task created successfully!');
+            navigate('/coord/*/list-projects');
             setTaskName('');
             setTaskDescription('');
         } catch (error) {

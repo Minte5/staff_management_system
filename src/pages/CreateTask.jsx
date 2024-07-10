@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+
 
 const CreateTask = () => {
     const { projectId } = useParams();
@@ -8,6 +9,7 @@ const CreateTask = () => {
     const [error, setError] = useState(null);
     const [taskName, setTaskName] = useState('');
     const [taskDescription, setTaskDescription] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProjectDetails = async () => {
@@ -43,7 +45,7 @@ const CreateTask = () => {
             const storedTokenString = localStorage.getItem('token');
             const token = JSON.parse(storedTokenString);
 
-            await axios.post(`http://0.0.0.0:8888/project/${projectId}/tasks/`, {
+            await axios.post(`http://0.0.0.0:8888/project/${projectId}/task/`, {
                 name: taskName,
                 description: taskDescription
             }, {
@@ -52,7 +54,9 @@ const CreateTask = () => {
                 }
             });
 
-            
+           
+            window.alert('Task created successfully!');
+            navigate('/admin/*/list-projects');
             setTaskName('');
             setTaskDescription('');
         } catch (error) {
@@ -73,17 +77,11 @@ const CreateTask = () => {
         <div className="container mt-5">
             <div className="row justify-content-center">
                 <div className="col-md-6">
-                
                     <div className="card project-card shadow rounded">
-                    
                         <div className="card-body">
-                            
                             <h2>{projectDetails.name}</h2>
-                            
                             <form onSubmit={handleTaskSubmit}>
-                                
                                 <div className="mb-3 form-floating">
-                                    
                                     <input
                                         type="text"
                                         className="form-control"
@@ -95,11 +93,7 @@ const CreateTask = () => {
                                     />
                                     <label htmlFor="name">Task Name</label>
                                 </div>
-
-                                
-
-                                <div>
-                                    
+                                <div className="form-floating">
                                     <textarea
                                         className="form-control"
                                         id="taskDescription"
@@ -110,9 +104,13 @@ const CreateTask = () => {
                                     />
                                     <label htmlFor="taskDescription">Task Description</label>
                                 </div>
-                                <button type="submit"className="btn btn-primary mt-3">Create Task</button>
-                            </form></div></div></div></div></div>
-        
+                                <button type="submit" className="btn btn-primary mt-3">Create Task</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 };
 

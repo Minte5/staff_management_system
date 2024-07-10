@@ -64,7 +64,7 @@ const ListEvents = () => {
                                 <tbody>
                                     {filteredEvents.map(event => (
                                         <tr key={event.id} className="row-clickable" onClick={() => (event.id)}>
-                                            <td><Link to={`/admin/*/event-details/${event.id}`}>{event.subject}</Link></td>
+                                            <td><Link to={`/staff/*/event-details/${event.id}`}>{event.subject}</Link></td>
 
                                             <td>{event.schedule_time}</td>
                                             <td>{event.link}</td>

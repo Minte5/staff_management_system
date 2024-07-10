@@ -14,7 +14,7 @@ const ListMessages = () => {
                 const storedTokenString = localStorage.getItem('token');
                 const token = JSON.parse(storedTokenString);
 
-                const response = await axios.get('http://0.0.0.0:8888/notifications/', {
+                const response = await axios.get('http://0.0.0.0:8888/msg/list/', {
                     headers: {
                         Authorization: `Token ${token.key}`
                     }
@@ -58,7 +58,7 @@ const ListMessages = () => {
                     Authorization: `Token ${token.key}`
                 }
             });
-            // After successful deletion, update the message list
+            
             setMessages(messages.filter(message => message.id !== messageId));
         } catch (error) {
             console.error('Error deleting message:', error);
@@ -68,7 +68,6 @@ const ListMessages = () => {
 
     return (
         <div className="container mt-5">
-          <h1 className='display-6 mb-4'><b>Coordinators Dashboard</b></h1>
           <div className="row justify-content-center">
             <div className="col-md-10">
               <div className="card message-list-card shadow">
@@ -86,9 +85,10 @@ const ListMessages = () => {
                   <div className="message-list">
                     {messages.map(message => (
                       <div key={message.id} className="message-item mb-3">
-                        <h2><Link to={`/admin/*/message-details/${message.id}`}>{message.verb}</Link></h2>
-                        <p>{message.description}</p>
-                        <p><small>{message.timestamp}</small></p>
+                        <h2><Link to={`/coord/*/message-details/${message.id}`}>{message.body}</Link></h2>
+                        <p>Sender: {message.sender}</p>
+                        <p>Created at: {new Date(message.created_at).toLocaleString()}</p>
+                        <p>Updated at: {message.updated_at ? new Date(message.updated_at).toLocaleString() : 'Not updated'}</p>
                         <div className="actions">
                           <button className="btn btn-primary mr-2" onClick={() => handleEdit(message.id)}>Edit</button>
                           <button className="btn btn-danger mr-2" onClick={() => handleDelete(message.id)}>Delete</button>

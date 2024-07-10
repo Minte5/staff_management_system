@@ -1,36 +1,35 @@
 import { Component } from 'react';
 import './Navbar.css';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'; // Import Axios
+import axios from 'axios'; 
 
 const Navbar = () => {
     const navigate = useNavigate();
 
     const handleLogout = () => {
         console.log('Logging out...');
-        //const token = localStorage.getItem('token'); // Retrieve token from local storage
+        
         const storedTokenString = localStorage.getItem('token');
 
-        // Parse the token string back into a JavaScript object
+        
         const token = JSON.parse(storedTokenString);
-        //const storedToken = localStorage.getItem('token');
-        //const token = JSON.parse(storedToken);
+        
         console.log('Stored Token:', token);
 
         axios.post('http://0.0.0.0:8888/auth/logout/', null, {
-            withCredentials: true, // Include credentials
+            withCredentials: true, 
             headers: {
-                'Authorization': `Token ${token.key}` // Include token in Authorization header
+                'Authorization': `Token ${token.key}` 
             }
         })
         .then(response => {
             console.log('Logout response:', response);
             if (response.status === 200) {
-                // Handle successful logout
-                localStorage.removeItem('token'); // Remove token from local storage
-                navigate('/'); // Redirect to login page
+                
+                localStorage.removeItem('token'); 
+                navigate('/'); 
             } else {
-                // Handle error
+                
                 console.error('Logout failed');
             }
         })
@@ -39,7 +38,7 @@ const Navbar = () => {
         });
     };
     const handleProfile = () => {
-        navigate('/admin/*/profile');
+        navigate('/staff/*/profile');
     };
 
     return (

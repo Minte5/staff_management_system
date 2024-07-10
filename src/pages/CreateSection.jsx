@@ -31,7 +31,7 @@ const CreateSection = () => {
         }
       });
       console.log('Section created successfully:', response.data);
-      // Clear form data after successful submission
+      
       setFormData({
         name: '',
         office: ''

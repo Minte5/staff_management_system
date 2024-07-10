@@ -14,11 +14,10 @@ const ProjectDetails = () => {
                 const storedTokenString = localStorage.getItem('token');
                 const token = JSON.parse(storedTokenString);
 
-                console.log('Error fetching project details:', id);
                 const response = await axios.get(`http://0.0.0.0:8888/project/${id}/`, {
                     withCredentials: true,
                     headers: {
-                        'Content-Type':'application/json',
+                        'Content-Type': 'application/json',
                         'Authorization': `Token ${token.key}`
                     }
                 });
@@ -30,11 +29,14 @@ const ProjectDetails = () => {
             }
         };
 
-        
         if (id) {
             fetchProjectDetails();
         }
-    },[id]);
+    }, [id]);
+
+    const handleAddTask = () => {
+        navigate(`/admin/*/create-task/${id}`);
+    };
 
     if (error) {
         return <p className="text-danger">{error}</p>;
@@ -56,14 +58,26 @@ const ProjectDetails = () => {
                             <p><strong>End Date:</strong> {project.expected_end_date}</p>
                             <p><strong>Description:</strong> {project.description}</p>
 
-                            
+                            <h2 className="mt-4">Tasks</h2>
+                            {project.tasks.length === 0 ? (
+                                <p>No tasks found for this project.</p>
+                            ) : (
+                                <ul className="list-group mt-3">
+                                    {project.tasks.map(task => (
+                                        <li key={task.id} className="list-group-item">
+                                            <strong>{task.name}</strong>
+                                            <p>{task.description}</p>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+
                             <button
-                                onClick={() => navigate(`/admin/*/create-task/${project.id}`)}
+                                onClick={handleAddTask}
                                 className='btn btn-primary mt-3'
                             >
                                 Add Task +
                             </button>
-                            
                         </div>
                     </div>
                 </div>

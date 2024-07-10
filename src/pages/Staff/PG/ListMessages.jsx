@@ -12,13 +12,22 @@ const ListMessages = () => {
         const fetchMessages = async () => {
             try {
                 const storedTokenString = localStorage.getItem('token');
-                const token = JSON.parse(storedTokenString);
+                if (!storedTokenString) {
+                    throw new Error("No token found in localStorage");
+                }
 
-                const response = await axios.get('http://0.0.0.0:8888/notifications/', {
+                const token = JSON.parse(storedTokenString);
+                if (!token || !token.key) {
+                    throw new Error("Invalid token format");
+                }
+
+                const response = await axios.get('http://0.0.0.0:8888/msg/list/', {
                     headers: {
                         Authorization: `Token ${token.key}`
                     }
                 });
+
+                console.log('Fetched messages:', response.data);
                 setMessages(response.data);
             } catch (error) {
                 console.error('Error fetching messages:', error);
@@ -48,61 +57,42 @@ const ListMessages = () => {
         }
     };
 
-    const handleDelete = async (messageId) => {
-        try {
-            const storedTokenString = localStorage.getItem('token');
-            const token = JSON.parse(storedTokenString);
-
-            await axios.delete(`http://0.0.0.0:8888/messages/${messageId}`, {
-                headers: {
-                    Authorization: `Token ${token.key}`
-                }
-            });
-            // After successful deletion, update the message list
-            setMessages(messages.filter(message => message.id !== messageId));
-        } catch (error) {
-            console.error('Error deleting message:', error);
-            setError('Error deleting message');
-        }
-    };
-
     return (
         <div className="container mt-5">
-          <h1 className='display-6 mb-4'><b>Staffs Dashboard</b></h1>
-          <div className="row justify-content-center">
-            <div className="col-md-10">
-              <div className="card message-list-card shadow">
-                <div className="card-body">
-                  <h1 className="mb-4">Message List</h1>
-                  {error && <p className="text-danger">{error}</p>}
-                  <div className="text-left mb-3">
-                    <button
-                      onClick={() => navigate('/admin/*/create-message')}
-                      className='btn btn-primary mt-3'
-                    >
-                      Add Message +
-                    </button>
-                  </div>
-                  <div className="message-list">
-                    {messages.map(message => (
-                      <div key={message.id} className="message-item mb-3">
-                        <h2><Link to={`/admin/*/message-details/${message.id}`}>{message.verb}</Link></h2>
-                        <p>{message.description}</p>
-                        <p><small>{message.timestamp}</small></p>
-                        <div className="actions">
-                          <button className="btn btn-primary mr-2" onClick={() => handleEdit(message.id)}>Edit</button>
-                          <button className="btn btn-danger mr-2" onClick={() => handleDelete(message.id)}>Delete</button>
-                          <button className="btn btn-secondary" onClick={() => navigate(`/admin/*/message-details/${message.id}`)}>View Details</button>
+            <div className="row justify-content-center">
+                <div className="col-md-10">
+                    <div className="card message-list-card shadow">
+                        <div className="card-body">
+                            <h1 className="mb-4">Message List</h1>
+                            {error && <p className="text-danger">{error}</p>}
+                            <div className="text-left mb-3">
+                                <button
+                                    onClick={() => navigate('/staff/*/create-message')}
+                                    className='btn btn-primary mt-3'
+                                >
+                                    Add Message +
+                                </button>
+                            </div>
+                            <div className="message-list">
+                                {messages.length === 0 && <p>No messages found.</p>}
+                                {messages.map(message => (
+                                    <div key={message.id} className="message-item mb-3">
+                                        <h2><Link to={`/staff/*/message-details/${message.id}`}>{message.body}</Link></h2>
+                                        <p>Sender: {message.sender}</p>
+                                        <p>Created at: {new Date(message.created_at).toLocaleString()}</p>
+                                        <p>Updated at: {message.updated_at ? new Date(message.updated_at).toLocaleString() : 'Not updated'}</p>
+                                        <div className="actions">
+                                            <button className="btn btn-primary mr-2" onClick={() => handleEdit(message.id)}>Reply</button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      );
+    );
 };
 
 export default ListMessages;

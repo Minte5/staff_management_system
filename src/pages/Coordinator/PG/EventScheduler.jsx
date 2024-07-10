@@ -38,8 +38,8 @@ const EventScheduler = () => {
         link: ''
       });
       setErrors({});
-      alert('User created successfully');
-      navigate('/admin/*/list-events');
+      alert('Event created successfully');
+      navigate('/coord/*/list-events');
     } catch (error) {
       console.error('Error scheduling event:', error);
     }

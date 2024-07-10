@@ -38,7 +38,7 @@ const EventScheduler = () => {
         link: ''
       });
       setErrors({});
-      alert('User created successfully');
+      alert('Event created successfully');
       navigate('/admin/*/list-events');
     } catch (error) {
       console.error('Error scheduling event:', error);
