@@ -67,6 +67,12 @@ const ProjectDetails = () => {
                                         <li key={task.id} className="list-group-item">
                                             <strong>{task.name}</strong>
                                             <p>{task.description}</p>
+                                            <button
+                                                onClick={() => navigate('/admin/*/project-task-assignee', { state: { projectPk: id, taskPk: task.id } })}
+                                                className='btn btn-primary mt-3'
+                                            >
+                                                Assign
+                                            </button>
                                         </li>
                                     ))}
                                 </ul>

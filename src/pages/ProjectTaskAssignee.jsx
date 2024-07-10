@@ -3,20 +3,19 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Autosuggest from 'react-autosuggest';
 
-const EventScheduleInvitation = () => {
+const ProjectTaskAssignee = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const eventSchedulePk = location.state?.eventSchedulePk;
+    const { projectPk, taskPk } = location.state;
 
     useEffect(() => {
-        if (!eventSchedulePk) {
-            
+        if (!projectPk || !taskPk) {
             navigate('/'); 
         }
-    }, [eventSchedulePk, navigate]);
+    }, [projectPk, taskPk, navigate]);
 
     const [formData, setFormData] = useState({
-        invited: '',
+        assignee: '',
         recipientId: '' 
     });
 
@@ -44,9 +43,8 @@ const EventScheduleInvitation = () => {
         }
     };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+    const handleChange = (e, { newValue }) => {
+        setFormData({ ...formData, assignee: newValue });
     };
 
     const getSuggestions = (value) => {
@@ -69,10 +67,10 @@ const EventScheduleInvitation = () => {
     const onSuggestionSelected = (event, { suggestion }) => {
         setFormData({ 
             ...formData, 
-            invited: `${suggestion.first_name} ${suggestion.last_name}`, 
+            assignee: `${suggestion.first_name} ${suggestion.last_name}`, 
             recipientId: suggestion.id 
         });
-        console.log(`Selected recipient ID: ${suggestion.id}`); 
+        console.log(`Selected recipient ID: ${suggestion.id}`);
     };
 
     const getSuggestionValue = (suggestion) => `${suggestion.first_name} ${suggestion.last_name}`;
@@ -84,45 +82,45 @@ const EventScheduleInvitation = () => {
     );
 
     const inputProps = {
-        placeholder: 'Recipient',
-        value: formData.invited,
+        placeholder: 'Assignee',
+        value: formData.assignee,
         onChange: handleChange,
-        name: 'invited'
+        name: 'assignee'
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(`Recipient ID on submit: ${formData.recipientId}`); 
-        console.log(`Event Schedule PK: ${eventSchedulePk}`); 
+        console.log(`Project PK: ${projectPk}`); 
+        console.log(`Task PK: ${taskPk}`); 
         try {
             const formDataToSend = new FormData();
-            formDataToSend.append('invited', formData.recipientId); 
+            formDataToSend.append('assignee', formData.recipientId);
 
             const storedTokenString = localStorage.getItem('token');
             const token = JSON.parse(storedTokenString);
 
-            const response = await axios.post(`http://0.0.0.0:8888/event_schedule/${eventSchedulePk}/invitation/`, formDataToSend, {
+            const response = await axios.post(`http://0.0.0.0:8888/project/${projectPk}/task/${taskPk}/assignee/`, formDataToSend, {
                 headers: {
                     Authorization: `Token ${token.key}`,
-                    //'Content-Type': 'multipart/form-data'
                 }
             });
 
-            console.log('Invitation sent successfully:', response.data);
+            console.log('Assignee added successfully:', response.data);
 
             setFormData({
-                invited: '',
+                assignee: '',
                 recipientId: ''
             });
-            alert('Invitation sent successfully');
-            navigate('/admin/*/list-events');
+            alert('Assignee added successfully');
+            navigate('/admin/*/list-projects');
         } catch (error) {
-            console.error('Error sending invitation:', error);
+            console.error('Error assigning task:', error);
         }
     };
 
-    if (!eventSchedulePk) {
-        return <p>Loading...</p>; // Show a loading message or redirect
+    if (!projectPk || !taskPk) {
+        return <p>Loading...</p>; 
     }
 
     return (
@@ -131,7 +129,7 @@ const EventScheduleInvitation = () => {
                 <div className="col-md-8">
                     <div className="card shadow">
                         <div className="card-body">
-                            <h1 className="mb-4">Send Event Invitation</h1>
+                            <h1 className="mb-4">Assign Task to User</h1>
                             <form onSubmit={handleSubmit}>
                                 <div className="form-group">
                                     <Autosuggest
@@ -144,7 +142,7 @@ const EventScheduleInvitation = () => {
                                         onSuggestionSelected={onSuggestionSelected}
                                     />
                                 </div>
-                                <button type="submit" className="btn btn-primary mt-3">Send Invitation</button>
+                                <button type="submit" className="btn btn-primary mt-3">Assign Task</button>
                             </form>
                         </div>
                     </div>
@@ -154,4 +152,4 @@ const EventScheduleInvitation = () => {
     );
 };
 
-export default EventScheduleInvitation;
+export default ProjectTaskAssignee;

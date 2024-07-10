@@ -17,6 +17,7 @@ import CreateSection from './CreateSection';
 import CreateTask from './CreateTask';
 import EventDetails from './EventDetails';
 import EventScheduleInvitation from './EventScheduleInvitation';
+import ProjectTaskAssignee from './ProjectTaskAssignee';
 
 import React, { useState, useEffect } from 'react';
 import './AdminPage.css';
@@ -77,6 +78,7 @@ const AdminDashboard = () => {
                     <Route path="*/create-section" element={<CreateSection />} />
                     <Route path="*/EventDetails/:id" element={<EventDetails />} />
                     <Route path="*/event-schedule-invitation" element={<EventScheduleInvitation />} />
+                    <Route path="*/project-task-assignee" element={<ProjectTaskAssignee />} />
                 </Routes>
             </div>
         </div>
