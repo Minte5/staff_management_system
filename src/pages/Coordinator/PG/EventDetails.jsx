@@ -53,8 +53,14 @@ const EventDetails = () => {
                             <p><strong>Description:</strong> {event.description}</p>
                             <p><strong>Date:</strong> {event.schedule_time}</p>
                             <p><strong>Link:</strong> <a href={event.link} target="_blank" rel="noopener noreferrer">{event.link}</a></p>
-
-                            
+                            <div className="text-left mb-3">
+                                <button
+                                    onClick={() => navigate('/coord/*/event-schedule-invitation', { state: { eventSchedulePk: id } })}
+                                    className='btn btn-primary mt-3'
+                                >
+                                    Invite
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -38,6 +38,28 @@ const ProjectDetails = () => {
         navigate(`/coord/*/create-task/${id}`);
     };
 
+    const handleDeleteTask = async (taskId) => {
+        try {
+            const storedTokenString = localStorage.getItem('token');
+            const token = JSON.parse(storedTokenString);
+
+            await axios.delete(`http://0.0.0.0:8888/project/${id}/task/${taskId}/`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Token ${token.key}`
+                }
+            });
+
+            setProject((prevProject) => ({
+                ...prevProject,
+                tasks: prevProject.tasks.filter(task => task.id !== taskId)
+            }));
+        } catch (error) {
+            console.error('Error deleting task:', error);
+            setError('Error deleting task. Please try again later.');
+        }
+    };
+
     if (error) {
         return <p className="text-danger">{error}</p>;
     }
@@ -67,6 +89,26 @@ const ProjectDetails = () => {
                                         <li key={task.id} className="list-group-item">
                                             <strong>{task.name}</strong>
                                             <p>{task.description}</p>
+                                            <div>
+                                                <button
+                                                    onClick={() => navigate('/coord/*/project-task-assignee', { state: { projectPk: id, taskPk: task.id } })}
+                                                    className='btn btn-primary mt-3'
+                                                >
+                                                    Assign
+                                                </button>
+                                                <button
+                                                    onClick={() => navigate('/coord/*/list-assignees', { state: { projectPk: id, taskPk: task.id } })}
+                                                    className='btn btn-success mt-3'
+                                                >
+                                                    Assignee List
+                                                </button>
+                                                <button
+                                                    onClick={() => handleDeleteTask(task.id)}
+                                                    className='btn btn-danger mt-3'
+                                                >
+                                                    Delete Task
+                                                </button>
+                                            </div>
                                         </li>
                                     ))}
                                 </ul>

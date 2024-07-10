@@ -18,6 +18,7 @@ import CreateTask from './CreateTask';
 import EventDetails from './EventDetails';
 import EventScheduleInvitation from './EventScheduleInvitation';
 import ProjectTaskAssignee from './ProjectTaskAssignee';
+import ListAssignees from './ListAssignees';
 
 import React, { useState, useEffect } from 'react';
 import './AdminPage.css';
@@ -79,6 +80,7 @@ const AdminDashboard = () => {
                     <Route path="*/EventDetails/:id" element={<EventDetails />} />
                     <Route path="*/event-schedule-invitation" element={<EventScheduleInvitation />} />
                     <Route path="*/project-task-assignee" element={<ProjectTaskAssignee />} />
+                    <Route path="*/list-assignees" element={<ListAssignees />} />
                 </Routes>
             </div>
         </div>

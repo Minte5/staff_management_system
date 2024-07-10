@@ -10,6 +10,8 @@ import CreateMessage from './CreateMessage';
 import EventDetails from './EventDetails';
 
 import ListProjects from './ListProjects';
+import ListAssignees from './ListAssignees';
+import ProjectTaskAssignee from './ProjectTaskAssignee';
 
 import Profile from './Profile';
 
@@ -17,6 +19,7 @@ import ListEvents from './ListEvents';
 import ListMessages from './ListMessages';
 
 import EventScheduler from './EventScheduler';
+import EventScheduleInvitation from './EventScheduleInvitation';
 
 
 
@@ -76,6 +79,9 @@ const PgCoord = () => {
                     <Route path="*/event-scheduler" element={<EventScheduler />} />
                     <Route path="*/create-message" element={<CreateMessage />} />
                     <Route path="*/EventDetails/:id" element={<EventDetails />} />
+                    <Route path="*/event-schedule-invitation" element={<EventScheduleInvitation />} />
+                    <Route path="*/list-assignees" element={<ListAssignees />} />
+                    <Route path="*/project-task-assignee" element={<ProjectTaskAssignee />} />
                     
                     <Route path="*/list-messages" element={<ListMessages />} />
                     
