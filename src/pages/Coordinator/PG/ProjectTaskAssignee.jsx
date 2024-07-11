@@ -113,7 +113,7 @@ const ProjectTaskAssignee = () => {
                 recipientId: ''
             });
             alert('Assignee added successfully');
-            navigate('/admin/*/list-projects');
+            navigate('/coord/*/list-projects');
         } catch (error) {
             console.error('Error assigning task:', error);
         }

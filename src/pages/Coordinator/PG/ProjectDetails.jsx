@@ -103,6 +103,12 @@ const ProjectDetails = () => {
                                                     Assignee List
                                                 </button>
                                                 <button
+                                                    onClick={() => navigate('/coord/*/list-comments', { state: { projectPk: id, taskPk: task.id } })}
+                                                    className='btn btn-success mt-3'
+                                                >
+                                                    Comment
+                                                </button>
+                                                <button
                                                     onClick={() => handleDeleteTask(task.id)}
                                                     className='btn btn-danger mt-3'
                                                 >

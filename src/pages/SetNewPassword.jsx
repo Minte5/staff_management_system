@@ -32,7 +32,7 @@ const SetNewPassword = () => {
       if (response.status === 200) {
         setMessage('Password reset successfully.');
         setTimeout(() => {
-            navigate('/login', { replace: true });
+            navigate('/', { replace: true });
         }, 2000);
       } else {
         setMessage(response.data.message || 'Failed to reset password.');

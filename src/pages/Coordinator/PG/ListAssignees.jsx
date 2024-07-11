@@ -90,7 +90,7 @@ const ListAssignees = () => {
                                                 </div>
                                                 
                                             </li>
-                                            <button className="btn btn-secondary" onClick={() => navigate('/admin/*/list-projects/')}>Projects</button>
+                                            <button className="btn btn-secondary" onClick={() => navigate('/coord/*/list-projects/')}>Projects</button>
                                             
                                         </div>
                                     ))}

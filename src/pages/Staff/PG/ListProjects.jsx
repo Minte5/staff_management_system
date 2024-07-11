@@ -101,7 +101,7 @@ const ListProjects = () => {
                     <tbody>
                       {filteredProjects.map(project => (
                         <tr key={project.id} className="row-clickable">
-                          <td><Link to={`/admin/*/project-details/${project.id}`}>{project.name}</Link></td>
+                          <td><Link to={`/staff/*/project-details/${project.id}`}>{project.name}</Link></td>
                           <td>{project.expected_start_date}</td>
                           <td>{project.expected_end_date}</td>
                           

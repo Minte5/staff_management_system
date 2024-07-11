@@ -17,6 +17,7 @@ import Profile from './Profile';
 
 import ListEvents from './ListEvents';
 import ListMessages from './ListMessages';
+import ListComments from './ListComments';
 
 import EventScheduler from './EventScheduler';
 import EventScheduleInvitation from './EventScheduleInvitation';
@@ -84,6 +85,7 @@ const PgCoord = () => {
                     <Route path="*/project-task-assignee" element={<ProjectTaskAssignee />} />
                     
                     <Route path="*/list-messages" element={<ListMessages />} />
+                    <Route path="*/list-comments" element={<ListComments />} />
                     
                 </Routes>
             </div>

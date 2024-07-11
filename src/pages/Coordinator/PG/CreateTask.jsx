@@ -44,7 +44,7 @@ const CreateTask = () => {
             const storedTokenString = localStorage.getItem('token');
             const token = JSON.parse(storedTokenString);
 
-            await axios.post(`http://0.0.0.0:8888/project/${projectId}/tasks/`, {
+            await axios.post(`http://0.0.0.0:8888/project/${projectId}/task/`, {
                 name: taskName,
                 description: taskDescription
             }, {

@@ -115,7 +115,7 @@ const EventScheduleInvitation = () => {
                 recipientId: ''
             });
             alert('Invitation sent successfully');
-            navigate('/admin/*/list-events');
+            navigate('/coord/*/list-events');
         } catch (error) {
             console.error('Error sending invitation:', error);
         }

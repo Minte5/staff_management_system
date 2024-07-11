@@ -102,7 +102,7 @@ const ListEvents = () => {
                     Authorization: `Token ${token.key}`
                 }
             });
-            // After successful deletion, update the event list
+            
             setEvents(events.filter(event => event.id !== eventId));
         } catch (error) {
             console.error('Error deleting event:', error);
