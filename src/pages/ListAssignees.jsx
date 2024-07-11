@@ -8,6 +8,7 @@ const ListAssignees = () => {
     const { projectPk, taskPk } = location.state || {};
 
     const [assignees, setAssignees] = useState([]);
+    const [users, setUsers] = useState({});
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -35,7 +36,30 @@ const ListAssignees = () => {
             }
         };
 
+        const fetchUsers = async () => {
+            try {
+                const storedTokenString = localStorage.getItem('token');
+                const token = JSON.parse(storedTokenString);
+
+                const response = await axios.get('http://0.0.0.0:8888/users/', {
+                    headers: {
+                        Authorization: `Token ${token.key}`
+                    }
+                });
+
+                const usersMap = response.data.reduce((map, user) => {
+                    map[user.id] = `${user.first_name} ${user.last_name}`;
+                    return map;
+                }, {});
+
+                setUsers(usersMap);
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        };
+
         fetchAssignees();
+        fetchUsers();
     }, [projectPk, taskPk]);
 
     const handleDeleteAssignee = async (assigneeId) => {
@@ -79,7 +103,7 @@ const ListAssignees = () => {
                                     {assignees.map(assignee => (
                                         <div key={assignee.id}>
                                             <li className="list-group-item">
-                                                <strong>{assignee.assignee}</strong>
+                                                <strong>{users[assignee.assignee]}</strong>
                                                 <div>
                                                     <button
                                                         onClick={() => handleDeleteAssignee(assignee.id)}
@@ -88,10 +112,8 @@ const ListAssignees = () => {
                                                         Delete
                                                     </button>
                                                 </div>
-                                                
                                             </li>
                                             <button className="btn btn-secondary" onClick={() => navigate('/admin/*/list-projects/')}>Projects</button>
-                                            
                                         </div>
                                     ))}
                                 </ul>
