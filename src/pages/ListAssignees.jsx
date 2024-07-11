@@ -101,22 +101,28 @@ const ListAssignees = () => {
                             ) : (
                                 <ul className="list-group mt-3">
                                     {assignees.map(assignee => (
-                                        <div key={assignee.id}>
-                                            <li className="list-group-item">
-                                                <strong>{users[assignee.assignee]}</strong>
-                                                <div>
-                                                    <button
-                                                        onClick={() => handleDeleteAssignee(assignee.id)}
-                                                        className='btn btn-danger mt-3'
-                                                    >
-                                                        Delete
-                                                    </button>
-                                                </div>
-                                            </li>
-                                            <button className="btn btn-secondary" onClick={() => navigate('/admin/*/list-projects/')}>Projects</button>
+                                        <div>
+                                            <div key={assignee.id}>
+                                                <li className="list-group-item">
+                                                    <strong>{users[assignee.assignee]}</strong>
+                                                    <div>
+                                                        <button
+                                                            onClick={() => handleDeleteAssignee(assignee.id)}
+                                                            className='btn btn-danger mt-3'
+                                                        >
+                                                            Delete
+                                                        </button>
+                                                    </div>
+                                                </li>
+                                                <button className="btn btn-secondary" onClick={() => navigate('/admin/*/list-projects/')}>Projects</button>
+                                            </div>
+                                            
+                                            
                                         </div>
+                                        
                                     ))}
                                 </ul>
+                                
                             )}
                         </div>
                     </div>
